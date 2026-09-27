@@ -204,6 +204,13 @@
     background: #f3f4f6;
 }
 
+/* Mantém cartazes e imagens promocionais legíveis dentro do formato dos cartões. */
+.spot-card > img.spot-image-contain {
+    object-fit: contain;
+    padding: 6px;
+    background: #f7f7f5;
+}
+
 .spot-card-body {
     padding: 18px;
 }
