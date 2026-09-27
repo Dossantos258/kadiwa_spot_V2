@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Kadiwa Spot: descubra restaurantes, cafés, bares e sabores locais em Moçambique.">
+    <meta name="theme-color" content="#FFC244">
+    <title>Kadiwa Spot | Descubra onde comer bem em Moçambique</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+    <!-- SVG Sprite -->
+    <svg class="svg-sprite" aria-hidden="true">
+        <symbol id="icon-pin" viewBox="0 0 24 24">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol>
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
+            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+            <path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+            <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+            <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                fill="none" />
+        </symbol>
+        <symbol id="icon-rider" viewBox="0 0 24 24">
+            <circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="2" fill="none" />
+            <path d="M5 19a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM19 19a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor"
+                stroke-width="2" fill="none" />
+            <path d="M12 11l-3 4h4l2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol>
+        <symbol id="icon-handshake" viewBox="0 0 24 24">
+            <path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-2.4-2.4a1 1 0 0 0-1.4 0L13.5 12"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="m20.5 7.5-3-3a1 1 0 0 0-1.4 0L13 7.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <path d="m3.5 16.5 3 3a1 1 0 0 0 1.4 0L11 16.4" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M10 7 7.6 4.6a1 1 0 0 0-1.4 0L3.5 7.3a1 1 0 0 0 0 1.4l2.4 2.4a1 1 0 0 0 1.4 0L10.5 8"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24">
+            <rect x="5" y="2" width="14" height="20" rx="3" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="18" r="1" fill="currentColor" />
+        </symbol>
+        <symbol id="icon-apple" viewBox="0 0 24 24">
+            <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.45c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.72-.93 2.74 1.01.08 2.02-.49 2.63-1.24Z"
+                fill="currentColor" />
+        </symbol>
+        <symbol id="icon-googleplay" viewBox="0 0 24 24">
+            <path d="M3.6 2.3c-.4.4-.6 1-.6 1.8v15.8c0 .8.2 1.4.6 1.8l.1.1 9.3-9.3v-.4L3.7 2.2l-.1.1Z" fill="#00D775" />
+            <path d="m16.1 15.3-3.1-3.1v-.4l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.5 0 2.1l-3.8 2.3Z" fill="#FFCF00" />
+            <path d="m13 11.8-9.4 9.4c.5.5 1.2.6 2 .1l10.5-6-3.1-3.5Z" fill="#FF3A44" />
+            <path d="M13 12.2 16.1 8.7 5.6 2.7C4.8 2.2 4.1 2.3 3.6 2.8L13 12.2Z" fill="#00E676" />
+        </symbol>
+        <symbol id="icon-restaurant" viewBox="0 0 24 24">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8ZM6 1v3M10 1v3M14 1v3"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </symbol>
+        <symbol id="icon-route" viewBox="0 0 24 24">
+            <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol>
+        <symbol id="icon-shopping-bag" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+            <path d="M16 10a4 4 0 0 1-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </symbol>
+        <symbol id="icon-megaphone" viewBox="0 0 24 24">
+            <path d="m3 11 16-6v14L3 13Z" stroke="currentColor" stroke-width="2" fill="none" />
+            <path d="m7 14 2 6h4l-2-7" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol>
+    </svg>
+
+
+    <header class="glovo-header" id="top">
+        <div class="container nav-wrap">
+            <a class="brand-link" href="index.html" aria-label="Kadiwa Spot Início">
+                <img class="header-logo" src="media/imagens/logo.png" alt="Kadiwa Spot">
+            </a>
+
+            <nav class="nav-links" aria-label="Menu principal">
+                <a class="active" href="index.html">Início</a>
+                <a href="#publicidade">Publicidade</a>
+                <a href="pages/explorar.html">Restaurantes & Takeaway</a>
+                <a href="#como">Como funciona</a>
+                <a href="pages/negocios.html">Para negócios</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn btn-teal btn-sm" href="pages/negocios.html">Registar / Começar</a>
+                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" id="mobile-toggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        
+        <section class="hero-glovo">
+            <div class="container hero-glovo-grid">
+               
+                <div class="hero-visual-col">
+                    <div class="hero-bag-wrapper">
+                        <img class="hero-bag-img" src="media/imagens/logo-light.png"
+                            alt="Logótipo Kadiwa Spot">
+                        <div class="hero-bag-badge">
+                       
+                     
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Copy & Capsule Search Bar -->
+                <div class="hero-content-col">
+                    <h1>Encontre o melhor<br>spot para comer</h1>
+                    <p class="hero-sub">Descubra restaurantes, cafés, bares e outros spots para conhecer na sua cidade.</p>
+
+                    <!-- Glovo Capsule Search Bar -->
+                    <form class="glovo-search-capsule" id="location-search-form" action="pages/explorar.html" method="get"
+                        role="search">
+                        <svg class="search-icon-pin" aria-hidden="true">
+                            <use href="#icon-pin"></use>
+                        </svg>
+                        <input class="search-input-field" id="search-address" type="search" name="q"
+                            placeholder="Que spot ou sabor procura?" autocomplete="off">
+                        <button type="button" class="btn-current-location" id="btn-use-location"
+                            title="Usar minha localização atual">
+                            <svg aria-hidden="true">
+                                <use href="#icon-target"></use>
+                            </svg>
+                            <span>Ver spots perto de mim</span>
+                        </button>
+                        <button type="submit" class="btn-search-submit">
+                            <svg aria-hidden="true" style="width: 18px; height: 18px;">
+                                <use href="#icon-search"></use>
+                            </svg>
+                            <span>Explorar</span>
+                        </button>
+                    </form>
+
+                    <!-- Quick Filter Pills -->
+                    <div class="hero-quick-pills" aria-label="Pesquisas populares">
+                        <span class="quick-pill-label">Spots procurados:</span>
+                        <a href="pages/explorar.html?q=Grelhados" class="quick-pill-item">Grelhados</a>
+                        <a href="pages/explorar.html?q=Pizzas" class="quick-pill-item">Pizzas</a>
+                        <a href="pages/explorar.html?categoria=fast-food" class="quick-pill-item">Fast-food</a>
+                        <a href="pages/explorar.html?categoria=cafe" class="quick-pill-item">Cafés</a>
+                        <a href="pages/explorar.html?q=Mariscos" class="quick-pill-item">Mariscos</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Glovo Bottom Speech Bubble Cutout Tail -->
+            <div class="hero-tail-divider" aria-hidden="true">
+                <svg viewBox="0 0 48 24">
+                    <path d="M0 0 C12 0 18 24 24 24 C30 24 36 0 48 0 Z" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Top Restaurants & Brands Showcase -->
+        <section class="section-brands" id="destaques">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <h2>Melhores spots</h2>
+                    <p>Conheça restaurantes, cafés e takeaways que dão sabor à sua cidade</p>
+                </div>
+
+                <div class="spots-carousel" aria-label="Carrossel dos melhores spots">
+                    <div class="spots-carousel-track">
+                        <div class="spots-carousel-set">
+                            <a href="pages/explorar.html?q=Kadiwa+Grill" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/GRILL.jpeg" alt="Kadiwa Grill"></div>
+                                <span class="brand-card-name">Kadiwa Grill</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Café+Acácia" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/cafe.jpeg" alt="Café Acácia"></div>
+                                <span class="brand-card-name">Café Acácia</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Bistro+Central" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/cafe2.jpeg" alt="Bistro Central"></div>
+                                <span class="brand-card-name">Bistro Central</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Âme+Gourmet" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/outoddor.png" alt="Âme Burger & Grill"></div>
+                                <span class="brand-card-name">Âme Gourmet</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Camarão+do+Sol" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/pub2.png" alt="Camarão do Sol"></div>
+                                <span class="brand-card-name">Camarão do Sol</span>
+                            </a>
+                            <a href="pages/explorar.html?q=West+Takeaway" class="brand-card-item">
+                                <div class="brand-logo-box"><img src="media/imagens/pub.jpeg" alt="West Burger & Takeaway"></div>
+                                <span class="brand-card-name">West Takeaway</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Sabores+da+Terra" class="brand-card-item">
+                                <div class="brand-logo-box" style="background: #FFF8E6;"><svg style="width: 38px; height: 38px; color: #EAA300;"><use href="#icon-restaurant"></use></svg></div>
+                                <span class="brand-card-name">Sabores da Terra</span>
+                            </a>
+                            <a href="pages/explorar.html?q=Padaria+Nova" class="brand-card-item">
+                                <div class="brand-logo-box" style="background: #EBF8F5;"><svg style="width: 38px; height: 38px; color: var(--color-teal);"><use href="#icon-restaurant"></use></svg></div>
+                                <span class="brand-card-name">Padaria Nova</span>
+                            </a>
+                        </div>
+
+                        <div class="spots-carousel-set" aria-hidden="true">
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/GRILL.jpeg" alt=""></div><span class="brand-card-name">Kadiwa Grill</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/cafe.jpeg" alt=""></div><span class="brand-card-name">Café Acácia</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/cafe2.jpeg" alt=""></div><span class="brand-card-name">Bistro Central</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/outoddor.png" alt=""></div><span class="brand-card-name">Âme Gourmet</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/pub2.png" alt=""></div><span class="brand-card-name">Camarão do Sol</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box"><img src="media/imagens/pub.jpeg" alt=""></div><span class="brand-card-name">West Takeaway</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box" style="background: #FFF8E6;"><svg style="width: 38px; height: 38px; color: #EAA300;"><use href="#icon-restaurant"></use></svg></div><span class="brand-card-name">Sabores da Terra</span></div>
+                            <div class="brand-card-item"><div class="brand-logo-box" style="background: #EBF8F5;"><svg style="width: 38px; height: 38px; color: var(--color-teal);"><use href="#icon-restaurant"></use></svg></div><span class="brand-card-name">Padaria Nova</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRANDE CARROSSEL DE PUBLICIDADE & DESTAQUES -->
+        <section class="section-advertising-carousel" id="publicidade">
+            <div class="container">
+                <div class="ad-section-header">
+                    <div>
+                        <div class="ad-badge">
+                            <svg style="width: 14px; height: 14px;">
+                                <use href="#icon-megaphone"></use>
+                            </svg>
+                            <span>Espaço Publicitário de Alto Impacto</span>
+                        </div>
+                        <h2>Destaques & Publicidade Kadiwa</h2>
+                    </div>
+                    <a class="btn btn-teal btn-sm" href="pages/negocios.html#precos">Quero Anunciar Aqui</a>
+                </div>
+
+                <!-- Carousel Component -->
+                <div class="ad-carousel-container" id="adCarousel">
+                    <div class="ad-carousel-track" id="carouselTrack">
+                        <!-- Slide 1: Outdoor Urbano -->
+                        <article class="ad-slide">
+                            <div class="ad-slide-content">
+                                <span class="ad-tag tag-yellow">📢 Outdoor Urbano • Maputo & Matola</span>
+                                <h3>A sua marca nos maiores Outdoors de Moçambique</h3>
+                                <p>Visibilidade em painéis gigantescos nas avenidas de maior tráfego. Conecte a sua
+                                    marca com mais de 100.000 pessoas diariamente.</p>
+                                <div class="ad-slide-actions">
+                                    <a class="btn btn-yellow" href="pages/negocios.html#outdoors">Ver Opções de
+                                        Outdoor</a>
+                                    <a class="btn btn-outline-white" href="pages/negocios.html#precos">Consultar
+                                        Preços</a>
+                                </div>
+                            </div>
+                            <div class="ad-slide-media">
+                                <img src="media/imagens/outoddor.png"
+                                    alt="Grande Painel Outdoor Publicitário em avenida movimentada">
+                            </div>
+                        </article>
+
+                        <!-- Slide 2: Mupis & Totens Digitais -->
+                        <article class="ad-slide">
+                            <div class="ad-slide-content">
+                                <span class="ad-tag tag-teal">🌊 Mupis Digitais • Costa do Sol</span>
+                                <h3>Totens e Telas Digitais nos Melhores Spots</h3>
+                                <p>Presença interativa ao longo da marginal, praias e centros de lazer. Impacte clientes
+                                    nos momentos de descontração e decisão de compra.</p>
+                                <div class="ad-slide-actions">
+                                    <a class="btn btn-teal" href="pages/negocios.html#outdoors">Conhecer Totens
+                                        Urbanos</a>
+                                    <a class="btn btn-outline-white" href="pages/negocios.html#precos">Pacotes
+                                        Publicitários</a>
+                                </div>
+                            </div>
+                            <div class="ad-slide-media">
+                                <img src="media/imagens/pub2.png"
+                                    alt="Mupi publicitário urbano na Costa do Sol com anúncio gastronómico">
+                            </div>
+                        </article>
+
+                        <!-- Slide 3: Grill & Gastronomia Nobre -->
+                        <article class="ad-slide">
+                            <div class="ad-slide-content">
+                                <span class="ad-tag tag-orange">🔥 Sabores da Terra • Grelhados</span>
+                                <h3>Grelhados no Ponto & Carnes Selecionadas</h3>
+                                <p>Conheça o churrasco, os petiscos e os sabores tradicionais que fazem parte da cidade.</p>
+                                <div class="ad-slide-actions">
+                                    <a class="btn btn-yellow" href="pages/explorar.html?q=Grelhados">Explorar Grelhados</a>
+                                    <a class="btn btn-outline-white" href="pages/negocios.html">Cadastrar Espaço de
+                                        Grill</a>
+                                </div>
+                            </div>
+                            <div class="ad-slide-media">
+                                <img src="media/imagens/GRILL.jpeg"
+                                    alt="Grelhados suculentos na brasa com legumes e temperos frescos">
+                            </div>
+                        </article>
+
+                        <!-- Slide 4: Takeaway, Bares & Menus Digitais -->
+                        <article class="ad-slide">
+                            <div class="ad-slide-content">
+                                <span class="ad-tag tag-yellow">📱 Tecnologia • Menus Interativos</span>
+                                <h3>Modernize o seu Restaurante, Fast-food ou Takeaway</h3>
+                                <p>Ofereça menus interativos em tablets e QR Code, reservas imediatas e atraia clientes
+                                    fiéis com a plataforma Kadiwa Spot.</p>
+                                <div class="ad-slide-actions">
+                                    <a class="btn btn-teal" href="pages/negocios.html">Registar Empresa</a>
+                                    <a class="btn btn-outline-white" href="pages/negocios.html#precos">Ver Planos para
+                                        Negócios</a>
+                                </div>
+                            </div>
+                            <div class="ad-slide-media">
+                                <img src="media/imagens/pub.jpeg"
+                                alt="Cliente a navegar num menu digital de hambúrgueres num tablet moderno">
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button class="carousel-btn carousel-btn-prev" id="prevSlide" aria-label="Slide anterior">
+                        <svg>
+                            <use href="#icon-chevron-left"></use>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn carousel-btn-next" id="nextSlide" aria-label="Próximo slide">
+                        <svg>
+                            <use href="#icon-chevron-right"></use>
+                        </svg>
+                    </button>
+
+                    <!-- Indicators -->
+                    <div class="carousel-dots" id="carouselDots" aria-label="Navegação do carrossel"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-zones-wavy" id="zonas">
+            <!-- Top SVG Wave -->
+            <div class="wavy-top-svg" aria-hidden="true">
+                <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                    <path d="M0,0 C300,40 900,40 1200,0 L1200,40 L0,40 Z" />
+                </svg>
+            </div>
+
+            <div class="container zones-container">
+                <div class="zones-rider-icon">
+                    <svg>
+                            <use href="#icon-pin"></use>
+                    </svg>
+                </div>
+                <h2>Comece pela sua zona</h2>
+                <p>Explore lugares e experiências gastronómicas nas cidades de Moçambique</p>
+
+                <div class="zones-pills-wrap">
+                    <button type="button" class="zone-pill" data-zone="Maputo Central">Maputo Cidade</button>
+                    <button type="button" class="zone-pill" data-zone="Polana">Polana Cimento</button>
+                    <button type="button" class="zone-pill" data-zone="Sommerschield">Sommerschield</button>
+                    <button type="button" class="zone-pill" data-zone="Costa do Sol">Costa do Sol</button>
+                    <button type="button" class="zone-pill" data-zone="Matola">Matola</button>
+                    <button type="button" class="zone-pill" data-zone="Zimpeto">Zimpeto</button>
+                    <button type="button" class="zone-pill" data-zone="Beira">Beira</button>
+                    <button type="button" class="zone-pill" data-zone="Nampula">Nampula</button>
+                    <button type="button" class="zone-pill" data-zone="Vilankulo">Vilankulo</button>
+                    <button type="button" class="zone-pill" data-zone="Inhambane">Inhambane</button>
+                    <button type="button" class="zone-pill" data-zone="Tete">Tete</button>
+                    <button type="button" class="zone-pill" data-zone="Pemba">Pemba</button>
+                    <button type="button" class="zone-pill" data-zone="Ponta do Ouro">Ponta do Ouro</button>
+                </div>
+            </div>
+
+            <!-- Bottom SVG Wave -->
+            <div class="wavy-bottom-svg" aria-hidden="true">
+                <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                    <path d="M0,40 C300,0 900,0 1200,40 L1200,0 L0,0 Z" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- Como funciona (Mint Green Section) -->
+        <section class="section-partners-mint" id="como">
+            <div class="container">
+                <div class="partners-header">
+                    <div class="partners-handshake-icon">
+                        <svg>
+                            <use href="#icon-handshake"></use>
+                        </svg>
+                    </div>
+                    <h2>Como funciona</h2>
+                    <p>Três passos simples para encontrar o seu próximo spot</p>
+                </div>
+
+                <div class="partners-cards-grid">
+                    <!-- Card 1: Explorar -->
+                    <article class="partner-card-item">
+                        <div class="partner-circle-photo">
+                            <img src="media/imagens/GRILL.jpeg"
+                                alt="Grelhados servidos num spot local">
+                        </div>
+                        <h3>Escolha um spot</h3>
+                        <p>Pesquise por sabor, tipo de lugar ou zona e encontre opções para a sua próxima saída.</p>
+                        <a class="btn btn-teal" href="pages/explorar.html">Explorar spots</a>
+                    </article>
+
+                    <!-- Card 2: Consultar -->
+                    <article class="partner-card-item">
+                        <div class="partner-circle-photo">
+                            <img src="media/imagens/chef.jpg"
+                                alt="Chef de cozinha e gestor de restaurante com uniforme profissional">
+                        </div>
+                        <h3>Veja antes de ir</h3>
+                        <p>Consulte menus, horários, contactos e informações que ajudam a escolher o spot certo.</p>
+                        <a class="btn btn-teal" href="pages/explorar.html">Ver destaques</a>
+                    </article>
+
+                    <!-- Card 3: Chegar -->
+                    <article class="partner-card-item">
+                        <div class="partner-circle-photo">
+                            <img src="media/imagens/pub.jpeg"
+                                alt="Ambiente acolhedor de um takeaway local">
+                        </div>
+                        <h3>Chegue com facilidade</h3>
+                        <p>Use a localização e os contactos do perfil para chegar ao spot que escolheu.</p>
+                        <a class="btn btn-teal" href="#zonas">Ver zonas</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-faq-wrap" id="faq">
+            <div class="container">
+                <div class="section-title-wrap">
+                    <h2>Perguntas frequentes</h2>
+                    <p>Tudo o que precisa de saber sobre o Kadiwa Spot</p>
+                </div>
+
+                <div class="faq-list">
+                    <article class="faq-item">
+                        <button type="button" class="faq-question-btn" aria-expanded="false">
+                            <span>O Kadiwa Spot é gratuito para utilizadores?</span>
+                            <svg class="faq-icon-arrow">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-content">
+                            <p>Sim. Pode pesquisar livremente, consultar menus, direcções, horários e informações dos
+                                espaços sem subscrição.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button type="button" class="faq-question-btn" aria-expanded="false">
+                            <span>Como funciona o destaque no Grande Carrossel de Publicidade?</span>
+                            <svg class="faq-icon-arrow">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-content">
+                            <p>Os estabelecimentos e marcas parceiras com planos Destaque e Premium garantem exibição no
+                                Grande Carrossel da página inicial e nos topos de categoria com banner widescreen de
+                                alto impacto.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button type="button" class="faq-question-btn" aria-expanded="false">
+                            <span>Como posso anunciar em outdoors e mupis urbanos?</span>
+                            <svg class="faq-icon-arrow">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-content">
+                            <p>Disponibilizamos espaços premium em outdoors nas avenidas principais de Maputo e Matola,
+                                além de totens digitais na Costa do Sol. Visite a página <a
+                                    href="pages/negocios.html#outdoors"
+                                    style="color: var(--color-teal); font-weight: 700;">Para Negócios</a> para consultar
+                                localizações e métricas de alcance.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button type="button" class="faq-question-btn" aria-expanded="false">
+                            <span>Como cadastro o meu restaurante, fast-food ou takeaway?</span>
+                            <svg class="faq-icon-arrow">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-content">
+                            <p>Basta aceder à secção Para Negócios, escolher o plano mais adequado e preencher os dados.
+                                A equipa analisa o perfil antes de o publicar.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button type="button" class="faq-question-btn" aria-expanded="false">
+                            <span>O serviço funciona fora de Maputo?</span>
+                            <svg class="faq-icon-arrow">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <div class="faq-answer-content">
+                            <p>Sim! Já cobrimos Matola, Beira, Nampula, Vilankulo, Inhambane, Tete e Pemba, com contínua
+                                expansão para novos distritos e províncias.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="section-newsletter">
+            <div class="container newsletter-box">
+                <h2>Fique a par das novidades gastronómicas</h2>
+                <p>Receba promoções exclusivas, lançamentos de novos restaurantes e novidades na sua caixa de entrada.
+                </p>
+
+                <form id="newsletter-form" class="newsletter-form-wrap">
+                    <input class="newsletter-input" type="email" placeholder="O seu email (ex.: nome@exemplo.com)"
+                        required>
+                    <button type="submit" class="btn btn-teal">Subscrever</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Glovo Dark Footer -->
+    <footer class="glovo-footer">
+        <div class="container">
+            <div class="footer-top-grid">
+                <div class="footer-brand-col">
+                    <img class="footer-logo-img" src="media/imagens/logo-dark.png" alt="Kadiwa Spot">
+                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
+                        Moçambique.</p>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Descobrir</h4>
+                    <ul>
+                        <li><a href="pages/explorar.html?categoria=restaurante">Restaurantes</a></li>
+                        <li><a href="pages/explorar.html?categoria=fast-food">Fast-food</a></li>
+                        <li><a href="pages/explorar.html?categoria=cafe">Cafés & Padarias</a></li>
+                        <li><a href="#zonas">Cidades e Zonas</a></li>
+                        <li><a href="#faq">Como funciona</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Para Empresas</h4>
+                    <ul>
+                        <li><a href="pages/negocios.html">Registar Empresa</a></li>
+                        <li><a href="pages/negocios.html#outdoors">Publicidade em Outdoors</a></li>
+                        <li><a href="pages/negocios.html#precos">Planos e Preços</a></li>
+                        <li><a href="pages/contacto.html?tipo=sugestao">Sugerir um espaço</a></li>
+                        <li><a href="pages/contacto.html">Parcerias Corporativas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Legal & Suporte</h4>
+                    <ul>
+                        <li><a href="pages/sobre.html">Sobre o Projecto</a></li>
+                        <li><a href="pages/sobre.html#termos">Termos e Condições</a></li>
+                        <li><a href="pages/sobre.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="#faq">Centro de Ajuda / FAQ</a></li>
+                        <li><a href="pages/contacto.html">Contacto Directo</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <div class="footer-copyright">
+                    &copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.
+                </div>
+
+                <div class="footer-selectors">
+                    <select class="footer-select" aria-label="Selecionar idioma">
+                        <option value="pt" selected>Português (MZ)</option>
+                        <option value="en">English</option>
+                    </select>
+                    <select class="footer-select" aria-label="Selecionar moeda">
+                        <option value="mzn" selected>MZN (Metical)</option>
+                        <option value="usd">USD ($)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>

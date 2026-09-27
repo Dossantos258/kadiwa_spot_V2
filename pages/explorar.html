@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore restaurantes, cafés, fast-foods e takeaways no Kadiwa Spot.">
+    <meta name="theme-color" content="#FFC244">
+    <title>Explorar spots | Kadiwa Spot</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/explorar.css">
+</head>
+
+<body class="explore-page">
+    <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+    <header class="glovo-header" id="top">
+        <div class="container nav-wrap">
+            <a class="brand-link" href="../index.html" aria-label="Kadiwa Spot Início">
+                <img class="header-logo" src="../media/imagens/logo.png" alt="Kadiwa Spot">
+            </a>
+
+            <nav class="nav-links" aria-label="Menu principal">
+                <a href="../index.html">Início</a>
+                <a class="active" href="explorar.html">Explorar</a>
+                <a href="../index.html#como">Como funciona</a>
+                <a href="negocios.html">Para negócios</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn btn-teal btn-sm" href="negocios.html">Registar espaço</a>
+                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" id="mobile-toggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        <section class="explore-hero" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="explore-heading">
+                    <p class="explore-kicker">Descobrir spots</p>
+                    <h1 id="explore-title">Encontre o spot certo</h1>
+                    <p>Pesquise por nome, tipo de comida ou zona. Depois compare as informações antes de sair.</p>
+                </div>
+
+                <!-- Pesquisa e filtros principais -->
+                <form class="explore-search" id="explore-form" role="search">
+                    <div class="explore-field explore-field-search">
+                        <label for="spot-search">O que procura?</label>
+                        <input id="spot-search" name="q" type="search"
+                            placeholder="Restaurante, grelhados, café..." autocomplete="off">
+                    </div>
+
+                    <div class="explore-field">
+                        <label for="spot-zone">Zona</label>
+                        <select id="spot-zone" name="zona">
+                            <option value="todas">Todas as zonas</option>
+                            <option value="Maputo Central">Maputo Central</option>
+                            <option value="Polana">Polana</option>
+                            <option value="Sommerschield">Sommerschield</option>
+                            <option value="Costa do Sol">Costa do Sol</option>
+                            <option value="Matola">Matola</option>
+                        </select>
+                    </div>
+
+                    <label class="open-filter" for="open-now">
+                        <input id="open-now" type="checkbox">
+                        <span>Aberto agora</span>
+                    </label>
+
+                    <button class="btn btn-teal explore-submit" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="explore-results" aria-labelledby="results-title">
+            <div class="container">
+                <div class="explore-toolbar">
+                    <div>
+                        <h2 id="results-title">Spots para conhecer</h2>
+                        <p id="results-count" aria-live="polite">8 spots encontrados</p>
+                    </div>
+                    <button class="clear-filters" id="clear-filters" type="button">Limpar filtros</button>
+                </div>
+
+                <!-- Categorias do Low-Fidelity, adaptadas à linguagem do Kadiwa -->
+                <div class="category-filters" aria-label="Filtrar por categoria">
+                    <button class="category-filter active" type="button" data-category="todos">Todos</button>
+                    <button class="category-filter" type="button" data-category="restaurante">Restaurantes</button>
+                    <button class="category-filter" type="button" data-category="cafe">Cafés</button>
+                    <button class="category-filter" type="button" data-category="fast-food">Fast-food</button>
+                    <button class="category-filter" type="button" data-category="takeaway">Takeaway</button>
+                </div>
+
+                <p class="prototype-note">Conteúdo demonstrativo para apresentar a experiência de exploração.</p>
+
+                <div class="spots-grid" id="spots-grid">
+                    <article class="spot-card" data-name="Kadiwa Grill grelhados pratos mocambicanos"
+                        data-category="restaurante" data-zone="Polana" data-open="true">
+                        <img src="../media/imagens/GRILL.jpeg" alt="Grelhados do Kadiwa Grill">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Polana</span></div>
+                            <h3>Kadiwa Grill</h3>
+                            <p>Grelhados e pratos moçambicanos.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
+                                <div><dt>Ideal para</dt><dd>Almoço e jantar</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Cafe Acacia cafe pequeno almoco pastelaria"
+                        data-category="cafe" data-zone="Sommerschield" data-open="true">
+                        <img src="../media/imagens/cafe.jpeg" alt="Identidade visual do Café Acácia">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Sommerschield</span></div>
+                            <h3>Café Acácia</h3>
+                            <p>Café, pequeno-almoço e pastelaria.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Café</dd></div>
+                                <div><dt>Ideal para</dt><dd>Pequeno-almoço</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Bistro Central cafe refeicoes ligeiras"
+                        data-category="cafe" data-zone="Maputo Central" data-open="false">
+                        <img src="../media/imagens/cafe2.jpeg" alt="Café servido no Bistro Central">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-closed">Fechado</span><span>Maputo Central</span></div>
+                            <h3>Bistro Central</h3>
+                            <p>Café e refeições ligeiras no centro da cidade.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Café</dd></div>
+                                <div><dt>Ideal para</dt><dd>Encontros rápidos</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Ame Gourmet burger hamburguer fast-food"
+                        data-category="fast-food" data-zone="Matola" data-open="true">
+                        <img src="../media/imagens/outoddor.png" alt="Apresentação do Âme Gourmet">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
+                            <h3>Âme Gourmet</h3>
+                            <p>Hambúrgueres e opções rápidas.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Fast-food</dd></div>
+                                <div><dt>Ideal para</dt><dd>Refeição rápida</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Camarao do Sol mariscos restaurante praia"
+                        data-category="restaurante" data-zone="Costa do Sol" data-open="true">
+                        <img src="../media/imagens/pub2.png" alt="Espaço do Camarão do Sol">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Costa do Sol</span></div>
+                            <h3>Camarão do Sol</h3>
+                            <p>Mariscos e pratos para partilhar.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
+                                <div><dt>Ideal para</dt><dd>Grupos</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="West Takeaway burger refeicoes takeaway"
+                        data-category="takeaway" data-zone="Maputo Central" data-open="false">
+                        <img src="../media/imagens/pub.jpeg" alt="Menu do West Takeaway">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-closed">Fechado</span><span>Maputo Central</span></div>
+                            <h3>West Takeaway</h3>
+                            <p>Hambúrgueres e refeições para levar.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Takeaway</dd></div>
+                                <div><dt>Ideal para</dt><dd>Refeição prática</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Sabores da Terra cozinha mocambicana restaurante"
+                        data-category="restaurante" data-zone="Matola" data-open="true">
+                        <img src="../media/imagens/chef.jpg" alt="Cozinha do Sabores da Terra">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
+                            <h3>Sabores da Terra</h3>
+                            <p>Comida moçambicana e pratos do dia.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
+                                <div><dt>Ideal para</dt><dd>Almoço</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+
+                    <article class="spot-card" data-name="Padaria Nova pao pastelaria cafe"
+                        data-category="cafe" data-zone="Matola" data-open="true">
+                        <img src="../media/imagens/cafe.jpeg" alt="Produtos da Padaria Nova">
+                        <div class="spot-card-body">
+                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
+                            <h3>Padaria Nova</h3>
+                            <p>Pão, pastelaria e café para começar o dia.</p>
+                            <dl class="spot-details">
+                                <div><dt>Tipo</dt><dd>Padaria e café</dd></div>
+                                <div><dt>Ideal para</dt><dd>Pequeno-almoço</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="spots-empty" id="spots-empty" hidden>
+                    <h3>Nenhum spot encontrado</h3>
+                    <p>Tente outro nome, categoria ou zona.</p>
+                    <button class="btn btn-teal" type="button" id="empty-clear">Limpar filtros</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glovo-footer">
+        <div class="container">
+            <div class="footer-top-grid">
+                <div class="footer-brand-col">
+                    <img class="footer-logo-img" src="../media/imagens/logo-dark.png" alt="Kadiwa Spot">
+                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em Moçambique.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Descobrir</h4>
+                    <ul>
+                        <li><a href="explorar.html">Todos os spots</a></li>
+                        <li><a href="explorar.html?categoria=restaurante">Restaurantes</a></li>
+                        <li><a href="explorar.html?categoria=cafe">Cafés</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Kadiwa Spot</h4>
+                    <ul>
+                        <li><a href="../index.html#como">Como funciona</a></li>
+                        <li><a href="sobre.html">Sobre o projecto</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Para negócios</h4>
+                    <ul>
+                        <li><a href="negocios.html">Registar espaço</a></li>
+                        <li><a href="negocios.html#precos">Planos e preços</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <div class="footer-copyright">&copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/explorar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Fale com a equipa do Kadiwa Spot para parcerias, publicidade em outdoors, cadastro de restaurantes ou suporte.">
+    <meta name="theme-color" content="#FFC244">
+    <title>Contacto & Parcerias | Kadiwa Spot</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+
+    <!-- Topbar (Glovo Yellow) -->
+    <header class="glovo-header">
+        <div class="container nav-wrap">
+            <a class="brand-link" href="../index.html" aria-label="Kadiwa Spot Início">
+                <img class="header-logo" src="../media/imagens/logo.png" alt="Kadiwa Spot">
+            </a>
+
+            <nav class="nav-links" aria-label="Menu principal">
+                <a href="../index.html">Início</a>
+                <a href="negocios.html#outdoors">Outdoors & Mupis</a>
+                <a href="negocios.html">Para negócios</a>
+                <a href="negocios.html#precos">Planos</a>
+                <a href="sobre.html">Sobre nós</a>
+                <a class="active" href="contacto.html">Contacto</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn btn-teal btn-sm" href="negocios.html#precos">Ver Planos</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        <section class="business-hero-glovo" style="padding: 50px 0 60px 0;">
+            <div class="container" style="text-align: center; max-width: 780px;">
+                <span class="ad-tag tag-yellow" style="background: rgba(0,0,0,0.08); margin-bottom: 12px;">Estamos aqui
+                    para ajudar</span>
+                <h1 style="font-size: 42px; font-weight: 900; margin-bottom: 14px;">Fale com a Equipa Kadiwa Spot</h1>
+                <p style="font-size: 17px; color: #333333;">Quer dar visibilidade ao seu negócio, cadastrar um espaço
+                    ou sugerir um lugar? Envie-nos a sua mensagem.</p>
+            </div>
+        </section>
+
+        <section style="padding: 70px 0; background: #FFFFFF;">
+            <div class="container"
+                style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; max-width: 1000px;">
+                <!-- Contact info -->
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div>
+                        <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 12px;">Canais Directos</h2>
+                        <p style="color: var(--color-text-secondary); line-height: 1.6;">A nossa equipa responde
+                            prontamente em horário laboral de segunda a sábado.</p>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div
+                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">📍 Escritórios
+                                Centrais</strong>
+                            <span style="color: var(--color-text-secondary); font-size: 14px;">Av. Julius Nyerere,
+                                Polana Cimento, Maputo, Moçambique</span>
+                        </div>
+
+                        <div
+                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">✉️ Email Comercial &
+                                Geral</strong>
+                            <a href="mailto:comercial@kadiwaspot.mz"
+                                style="color: var(--color-teal); font-weight: 600; font-size: 14px;">comercial@kadiwaspot.mz</a>
+                        </div>
+
+                        <div
+                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">📞 Atendimento &
+                                WhatsApp</strong>
+                            <a href="tel:+258840000000"
+                                style="color: var(--color-teal); font-weight: 600; font-size: 14px;">+258 84 000
+                                0000</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div
+                    style="background: #FFFFFF; padding: 36px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 20px;">Envie uma Mensagem</h3>
+                    <form id="contact-form" style="display: flex; flex-direction: column; gap: 16px;">
+                        <div>
+                            <label for="contact-name"
+                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Nome
+                                Completo *</label>
+                            <input id="contact-name" type="text" class="newsletter-input"
+                                style="width: 100%; border-radius: var(--radius-md);" required
+                                placeholder="Ex.: Bento Machava">
+                        </div>
+
+                        <div>
+                            <label for="contact-email"
+                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Endereço
+                                de E-mail *</label>
+                            <input id="contact-email" type="email" class="newsletter-input"
+                                style="width: 100%; border-radius: var(--radius-md);" required
+                                placeholder="nome@exemplo.com">
+                        </div>
+
+                        <div>
+                            <label for="contact-subject"
+                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Assunto
+                                do Contacto *</label>
+                            <select id="contact-subject" class="newsletter-input"
+                                style="width: 100%; border-radius: var(--radius-md);" required>
+                                <option value="">Selecione o assunto</option>
+                                <option value="outdoor">Publicidade em Outdoors & Mupis</option>
+                                <option value="carrossel">Destaque no Grande Carrossel</option>
+                                <option value="negocio">Registar Restaurante / Takeaway</option>
+                                <option value="sugestao">Sugerir ou actualizar um espaço</option>
+                                <option value="outro">Outro assunto</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="contact-message"
+                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Mensagem
+                                *</label>
+                            <textarea id="contact-message" rows="4" class="newsletter-input"
+                                style="width: 100%; border-radius: var(--radius-md);" required
+                                placeholder="Descreva a sua mensagem ou dúvida..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-teal btn-lg" style="margin-top: 8px;">Enviar
+                            Mensagem</button>
+                    </form>
+                    <div id="form-feedback"
+                        style="display: none; margin-top: 16px; padding: 12px; border-radius: var(--radius-md); background: var(--color-teal-light); color: var(--color-teal); font-weight: 600; text-align: center;">
+                        ✓ Mensagem enviada com sucesso! Entraremos em contacto brevemente.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Glovo Dark Footer -->
+    <footer class="glovo-footer">
+        <div class="container">
+            <div class="footer-top-grid">
+                <div class="footer-brand-col">
+                    <img class="footer-logo-img" src="../media/imagens/logo-dark.png" alt="Kadiwa Spot">
+                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
+                        Moçambique.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Para Empresas</h4>
+                    <ul>
+                        <li><a href="negocios.html">Registar Empresa</a></li>
+                        <li><a href="negocios.html#outdoors">Publicidade em Outdoors</a></li>
+                        <li><a href="negocios.html#precos">Planos e Preços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="../index.html">Início</a></li>
+                        <li><a href="../index.html#publicidade">Grande Carrossel</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="sobre.html">Sobre nós</a></li>
+                        <li><a href="sobre.html#termos">Termos e Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <div class="footer-copyright">&copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('form-feedback').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
