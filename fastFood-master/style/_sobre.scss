@@ -1,0 +1,31 @@
+@use "index" as ui;
+
+
+section.sobre{
+    display: flex;
+    gap: 40px;
+    padding: 20px;
+    
+    @include ui.center;
+    .imgSobre{
+        img{
+            min-width: 500px;
+            width: 100%;
+        }
+    }
+    .textSobre{
+        max-width: 550px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+}
+
+
+
+@media (max-width: 750px){
+    section.sobre{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,46 @@
+@use "index" as ui;
+
+
+
+
+
+section.SectionComentarios {
+    @include ui.center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+
+    .textoParceiros {
+        text-align: center;
+    }
+
+    .divComentarios {
+        @include ui.center;
+        gap: 40px;
+
+        article {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            border: 2px #00000015 solid;
+            box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.048);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            blockquote {
+                font-size: 18px;
+            }
+
+            footer {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+
+
+        }
+    }
+}

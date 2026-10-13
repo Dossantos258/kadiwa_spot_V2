@@ -1,0 +1,81 @@
+@use "index" as ui;
+
+
+
+@keyframes moverDireita {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%)
+    }
+}
+
+
+
+section.SectionParceiros {
+    @include ui.center;
+    flex-direction: column;
+    gap: 20px;
+
+    .textoParceiros {
+        text-align: center;
+
+    }
+
+    .imgParceiros {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+
+        .logoParceiros {
+            @include ui.center;
+
+            .imgLogosParceiros {
+                @include ui.center;
+
+                img {
+                    width: 150px;
+                }
+            }
+        }
+
+        .barnerParceiros {
+            .scrollView {
+                display: flex;
+                flex-direction: row;
+                overflow: auto;
+                
+                .duplicados {
+                    display: flex;
+                    gap: 20px;
+                    animation: moverDireita 40s linear infinite;
+                    padding-right: 20px;
+                    display: 1 1 0;
+                    padding: 15px;
+                    &:hover{
+                        transition: 2s;
+                        animation: none;
+                    }
+
+                    .imgBarnerParceiros {
+                        img {
+                            border-radius: 20px;
+                            width: 250px;
+                        }
+                        &:hover{
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+
+}

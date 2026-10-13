@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS - Animações, Variáveis, Keyframes e Media Queries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:rgb(4, 28, 94);
+            overflow: hidden;
+        }
+
+        .slide-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 40px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .code {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #667eea;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .demo {
+            background: #fff9db;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 2px dashed #ffc107;
+        }
+
+        strong {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Título -->
+        <div class="slide active">
+            <h1>CSS Avançado</h1>
+            <div style="text-align: center; margin-top: 80px;">
+                <h2 style="border: none;">Animações • Variáveis • Keyframes • Media Queries</h2>
+            </div>
+        </div>
+
+        <!-- Slide 2: Animações CSS -->
+        <div class="slide">
+            <h2>Animações CSS</h2>
+            
+            <h3>Transitions (Transições Simples)</h3>
+            <div class="code">transition: propriedade duração timing-function delay;</div>
+            
+            <div class="two-column">
+                <div class="box">
+                    <h4>Exemplo</h4>
+                    <div class="code">.botao {
+  background: blue;
+  transition: all 0.3s ease;
+}
+
+.botao:hover {
+  background: red;
+  transform: scale(1.1);
+}</div>
+                </div>
+                
+                <div class="box">
+                    <h4>Timing Functions</h4>
+                    <ul>
+                        <li><strong>ease</strong> - padrão</li>
+                        <li><strong>linear</strong> - velocidade constante</li>
+                        <li><strong>ease-in</strong> - início lento</li>
+                        <li><strong>ease-out</strong> - fim lento</li>
+                        <li><strong>ease-in-out</strong> - início e fim lentos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Keyframes -->
+        <div class="slide">
+            <h2>@keyframes - Animações Complexas</h2>
+            
+            <div class="code">@keyframes nome {
+  0% { /* estado inicial */ }
+  50% { /* meio */ }
+  100% { /* estado final */ }
+}
+
+.elemento {
+  animation: nome 2s ease infinite;
+}</div>
+
+            <h3>Propriedades Principais</h3>
+            <div class="two-column">
+                <div class="box">
+                    <ul>
+                        <li><strong>animation-duration:</strong> 2s</li>
+                        <li><strong>animation-delay:</strong> 0.5s</li>
+                        <li><strong>animation-iteration-count:</strong> infinite</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <ul>
+                        <li><strong>animation-direction:</strong> alternate</li>
+                        <li><strong>animation-fill-mode:</strong> forwards</li>
+                        <li><strong>animation-timing-function:</strong> ease</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Exemplos de Keyframes -->
+        <div class="slide">
+            <h2>Exemplos de Animações</h2>
+            
+            <div class="two-column">
+                <div class="box">
+                    <h4>Fade In</h4>
+                    <div class="code">@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.elemento {
+  animation: fadeIn 1s;
+}</div>
+                </div>
+                
+                <div class="box">
+                    <h4>Rotação</h4>
+                    <div class="code">@keyframes girar {
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+.loading {
+  animation: girar 1s linear infinite;
+}</div>
+                </div>
+            </div>
+
+            <div class="box" style="margin-top: 20px;">
+                <h4>Pulsar</h4>
+                <div class="code">@keyframes pulsar {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.botao { animation: pulsar 2s infinite; }</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Variáveis CSS -->
+        <div class="slide">
+            <h2>Variáveis CSS (Custom Properties)</h2>
+            
+            <h3>Declaração e Uso</h3>
+            <div class="code">:root {
+  --cor-principal: #3498db;
+  --espacamento: 16px;
+  --fonte: 'Arial', sans-serif;
+}
+
+.elemento {
+  color: var(--cor-principal);
+  padding: var(--espacamento);
+  font-family: var(--fonte);
+}</div>
+
+            <h3>Valor Padrão (Fallback)</h3>
+            <div class="code">color: var(--cor-inexistente, #000);</div>
+        </div>
+
+        <!-- Slide 6: Variáveis - Exemplos -->
+        <div class="slide">
+            <h2>Variáveis - Casos de Uso</h2>
+            
+            <div class="two-column">
+                <div class="box">
+                    <h4>Sistema de Cores</h4>
+                    <div class="code">:root {
+  --primaria: #007bff;
+  --sucesso: #28a745;
+  --perigo: #dc3545;
+}
+
+.botao-primario {
+  background: var(--primaria);
+}</div>
+                </div>
+                
+                <div class="box">
+                    <h4>Espaçamento</h4>
+                    <div class="code">:root {
+  --espaco-sm: 8px;
+  --espaco-md: 16px;
+  --espaco-lg: 24px;
+}
+
+.card {
+  padding: var(--espaco-md);
+  margin: var(--espaco-lg);
+}</div>
+                </div>
+            </div>
+
+            <h3>Tema Claro/Escuro</h3>
+            <div class="code">:root { --fundo: #fff; --texto: #000; }
+
+[data-theme="dark"] { --fundo: #1a1a1a; --texto: #fff; }
+
+body { background: var(--fundo); color: var(--texto); }</div>
+        </div>
+
+        <!-- Slide 7: Media Queries Intro -->
+        <div class="slide">
+            <h2>@media - Responsividade</h2>
+            
+            <h3>Sintaxe</h3>
+            <div class="code">@media tipo and (condição) {
+  /* estilos condicionais */
+}</div>
+
+            <h3>Breakpoints Comuns</h3>
+            <div class="box">
+                <ul>
+                    <li><strong>Mobile:</strong> max-width: 576px</li>
+                    <li><strong>Tablet:</strong> min-width: 577px e max-width: 768px</li>
+                    <li><strong>Desktop:</strong> min-width: 1025px</li>
+                    <li><strong>Telas Grandes:</strong> min-width: 1440px</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Media Queries - Exemplo -->
+        <div class="slide">
+            <h2>Media Queries - Mobile First</h2>
+            
+            <div class="code">/* Mobile (padrão) */
+.container {
+  width: 100%;
+  padding: 10px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+    padding: 20px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container {
+    width: 1000px;
+    padding: 30px;
+  }
+}</div>
+        </div>
+
+        <!-- Slide 9: Media Queries - Recursos -->
+        <div class="slide">
+            <h2>Media Queries - Outros Recursos</h2>
+            
+            <div class="two-column">
+                <div class="box">
+                    <h4>Orientação</h4>
+                    <div class="code">@media (orientation: portrait) {
+  /* vertical */
+}
+
+@media (orientation: landscape) {
+  /* horizontal */
+}</div>
+                </div>
+                
+                <div class="box">
+                    <h4>Preferências do Sistema</h4>
+                    <div class="code">@media (prefers-color-scheme: dark) {
+  body {
+    background: #1a1a1a;
+    color: #fff;
+  }
+}</div>
+                </div>
+            </div>
+
+            <h3>Acessibilidade</h3>
+            <div class="code">@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}</div>
+        </div>
+
+        <!-- Slide 10: Conclusão -->
+        <div class="slide">
+            <h2>Resumo</h2>
+            
+            <div class="box" style="margin: 20px 0;">
+                <h3>🎬 Animações</h3>
+                <p><strong>Transitions</strong> para mudanças simples | <strong>Keyframes</strong> para animações complexas</p>
+            </div>
+
+            <div class="box" style="margin: 20px 0;">
+                <h3>🎨 Variáveis</h3>
+                <p>Valores reutilizáveis | Temas dinâmicos | Manutenção facilitada</p>
+            </div>
+
+            <div class="box" style="margin: 20px 0;">
+                <h3>📱 Media Queries</h3>
+                <p>Responsividade | Adaptação a diferentes dispositivos | Mobile First</p>
+            </div>
+
+            <h3 style="text-align: center; margin-top: 50px; color: #667eea;">Boa prática: Combine todos para criar experiências incríveis! 🚀</h3>
+        </div>
+    </div>
+
+    <div class="slide-number">
+        <span id="current">1</span> / <span id="total">10</span>
+    </div>
+
+    <div class="controls">
+        <button onclick="prevSlide()">← Anterior</button>
+        <button onclick="nextSlide()">Próximo →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>

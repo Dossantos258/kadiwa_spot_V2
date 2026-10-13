@@ -1,0 +1,102 @@
+@use "index" as v;
+@use "hero";
+@use "sobre";
+@use "parceiros";
+@use "comentarios";
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'arial';
+}
+
+
+
+p {
+    color: v.$cor_terceira;
+    font-family: v.$font_terceira;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+h1 {
+    font-size: 64;
+    text-align: center;
+}
+
+
+h2 {
+    font-family: v.$font_principal;
+    font-size: 42px;
+    font-weight: normal;
+}
+
+header {
+    display: flex;
+    position: static;
+    z-index: 10;
+    height: 10vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+
+        ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            font-size: 18px;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: v.$cor_secundaria;
+                }
+
+                transition: 1s;
+
+                &:hover {
+                    transform: translateX(10) scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+
+section.seccao {
+    height: 90vh;
+}
+
+
+#butVoltar {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    text-decoration: none;
+    color: aliceblue;
+    background-color: v.$cor_principal;
+    padding: 15px;
+    border-radius: 30px;
+    transition: 1s;
+}
+
+#butVoltar:hover {
+    transform: scale(1.2);
+}
+
+
+@media (max-width: 750px) {
+
+    header {
+        display: none;
+    }
+
+    section.seccao {
+        height: 100vh;
+    }
+}
