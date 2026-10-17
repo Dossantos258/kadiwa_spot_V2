@@ -45,7 +45,6 @@
     border: 1px solid rgb(24 26 27 / 10%);
     border-radius: var(--radius-xl);
     background: #ffffff;
-    box-shadow: 0 14px 30px rgb(128 88 0 / 14%);
 }
 
 .explore-field label {
@@ -75,7 +74,8 @@
 .explore-field input:focus,
 .explore-field select:focus {
     border-color: var(--color-teal);
-    box-shadow: 0 0 0 3px rgb(0 132 107 / 18%);
+    outline: 2px solid var(--color-teal-hover);
+    outline-offset: 2px;
 }
 
 .open-filter {
@@ -187,14 +187,12 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     background: #ffffff;
-    box-shadow: 0 8px 22px rgb(91 72 25 / 7%);
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .spot-card:hover {
     transform: translateY(-3px);
     border-color: #b9ded7;
-    box-shadow: 0 14px 30px rgb(91 72 25 / 12%);
 }
 
 .spot-card > img {

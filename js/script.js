@@ -2,6 +2,43 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Pausar o carrossel de cartazes em Melhores spots.
+    const foodCarousel = document.getElementById('food-carousel');
+    const foodToggle = document.getElementById('food-carousel-toggle');
+    if (foodCarousel) {
+        const foodTrack = foodCarousel.querySelector('.food-carousel-track');
+        const firstGroup = foodTrack?.querySelector('.food-carousel-set');
+        if (foodTrack && firstGroup) {
+            // Repetir os cartazes o suficiente para preencher também ecrãs largos.
+            const fillCarousel = () => {
+                const groupWidth = firstGroup.offsetWidth;
+                if (!groupWidth) return;
+                const requiredGroups = Math.ceil(foodCarousel.clientWidth / groupWidth) + 1;
+                while (foodTrack.children.length < requiredGroups) {
+                    const repeatedGroup = firstGroup.cloneNode(true);
+                    repeatedGroup.setAttribute('aria-hidden', 'true');
+                    repeatedGroup.querySelectorAll('a').forEach(link => link.tabIndex = -1);
+                    repeatedGroup.querySelectorAll('img').forEach(img => img.alt = '');
+                    foodTrack.appendChild(repeatedGroup);
+                }
+                foodTrack.style.setProperty('--food-carousel-offset', `-${groupWidth}px`);
+            };
+            fillCarousel();
+            if ('ResizeObserver' in window) {
+                new ResizeObserver(fillCarousel).observe(foodCarousel);
+            } else {
+                window.addEventListener('resize', fillCarousel);
+            }
+        }
+    }
+    if (foodCarousel && foodToggle) {
+        foodToggle.addEventListener('click', () => {
+            const paused = foodCarousel.classList.toggle('is-paused');
+            foodToggle.setAttribute('aria-pressed', String(paused));
+            foodToggle.textContent = paused ? 'Continuar carrossel' : 'Pausar carrossel';
+        });
+    }
+
     /* ==========================================================================
        1. STICKY HEADER SCROLL EFFECT
        ========================================================================== */
@@ -35,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinks.style.top = '76px';
                 navLinks.style.left = '0';
                 navLinks.style.width = '100%';
-                navLinks.style.background = '#FFC244';
+                navLinks.style.background = header ? getComputedStyle(header).backgroundColor : '#FFFFFF';
                 navLinks.style.padding = '24px';
-                navLinks.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
             }
         });
     }

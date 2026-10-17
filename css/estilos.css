@@ -35,12 +35,6 @@
     --color-accent-red: #E11D48;
     --color-accent-purple: #7C3AED;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-    --shadow-xl: 0 20px 35px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-    --shadow-pill: 0 4px 20px rgba(0, 0, 0, 0.09);
 
     /* Radii */
     --radius-pill: 9999px;
@@ -156,13 +150,11 @@ button {
 .btn-teal {
     background-color: var(--color-teal);
     color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(0, 160, 130, 0.35);
 }
 
 .btn-teal:hover {
     background-color: var(--color-teal-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 160, 130, 0.45);
     color: #FFFFFF;
 }
 
@@ -174,7 +166,6 @@ button {
     background-color: var(--color-primary-yellow);
     color: var(--color-text-main);
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(255, 194, 68, 0.4);
 }
 
 .btn-yellow:hover {
@@ -184,14 +175,13 @@ button {
 
 .btn-white {
     background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
     color: var(--color-text-main);
-    box-shadow: var(--shadow-md);
 }
 
 .btn-white:hover {
     background-color: #F9FAFB;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
 }
 
 .btn-outline-white {
@@ -223,13 +213,12 @@ button {
     position: sticky;
     top: 0;
     z-index: 100;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .glovo-header.scrolled {
     background-color: rgba(255, 194, 68, 0.98);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .nav-wrap {
@@ -318,6 +307,7 @@ button {
    ========================================================================== */
 .hero-glovo {
     background-color: var(--color-primary-yellow);
+    border-top: 2px solid rgba(24, 26, 27, 0.2);
     position: relative;
     padding-top: 36px;
     padding-bottom: 70px;
@@ -352,7 +342,6 @@ button {
     height: auto;
     max-height: 420px;
     object-fit: contain;
-    filter: drop-shadow(0 20px 30px rgba(184, 131, 0, 0.35));
     animation: floatSmooth 6s ease-in-out infinite alternate;
 }
 
@@ -373,7 +362,6 @@ button {
     background: #FFFFFF;
     padding: 8px 16px;
     border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-lg);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -419,18 +407,19 @@ button {
 /* Glovo-Style Capsule Search Bar */
 .glovo-search-capsule {
     background: #FFFFFF;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-pill);
     padding: 6px 8px 6px 18px;
-    box-shadow: var(--shadow-pill);
     display: flex;
     align-items: center;
     gap: 12px;
     margin-top: 8px;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .glovo-search-capsule:focus-within {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+    outline: 2px solid var(--color-teal-hover);
+    outline-offset: 2px;
     transform: translateY(-1px);
 }
 
@@ -528,7 +517,6 @@ button {
 .quick-pill-item:hover {
     background: #FFFFFF;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* Glovo Bottom Speech Bubble Cutout Tail */
@@ -559,7 +547,7 @@ button {
 
 .section-brands .container {
     max-width: none;
-    padding-inline: clamp(10px, 1.5vw, 22px);
+    padding-inline: 0;
 }
 
 .section-brands .section-title-wrap {
@@ -667,13 +655,11 @@ button {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     transition: var(--transition);
     overflow: hidden;
 }
 
 .brand-card-item:hover .brand-logo-box {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     border-color: var(--color-teal-subtle);
 }
 
@@ -753,7 +739,6 @@ button {
     width: 100%;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-xl);
     background: #181A1B;
 }
 
@@ -867,7 +852,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     z-index: 10;
     transition: var(--transition);
 }
@@ -950,13 +934,11 @@ button {
     justify-content: center;
     margin-bottom: 24px;
     position: relative;
-    box-shadow: 0 8px 24px rgba(255, 194, 68, 0.2);
     transition: var(--transition);
 }
 
 .feature-col-item:hover .feature-illustration-circle {
     transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 14px 30px rgba(255, 194, 68, 0.35);
 }
 
 .feature-icon-svg {
@@ -1030,7 +1012,6 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     margin-bottom: 18px;
 }
 
@@ -1067,7 +1048,6 @@ button {
     font-weight: 700;
     padding: 9px 20px;
     border-radius: var(--radius-pill);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
     transition: var(--transition);
     cursor: pointer;
     border: 1px solid transparent;
@@ -1075,7 +1055,6 @@ button {
 
 .zone-pill:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     color: var(--color-teal);
 }
 
@@ -1150,7 +1129,6 @@ button {
 
 .store-badge-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .store-badge-btn svg {
@@ -1189,13 +1167,11 @@ button {
     width: 100%;
     max-width: 540px;
     border-radius: var(--radius-xl);
-    box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.15);
     transition: var(--transition);
 }
 
 .app-mockup-img:hover {
     transform: translateY(-6px);
-    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.22);
 }
 
 /* ==========================================================================
@@ -1220,7 +1196,6 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 160, 130, 0.15);
     margin-bottom: 16px;
 }
 
@@ -1250,19 +1225,18 @@ button {
 
 .partner-card-item {
     background: #FFFFFF;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     padding: 36px 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 8px 30px rgba(0, 160, 130, 0.08);
     transition: var(--transition);
 }
 
 .partner-card-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 40px rgba(0, 160, 130, 0.16);
 }
 
 .partner-step-icon {
@@ -1271,7 +1245,7 @@ button {
     border-radius: 50%;
     margin-bottom: 24px;
     background: #FFFFFF;
-    border: 4px solid var(--color-teal-subtle);
+    border: 1px solid var(--color-teal-subtle);
     color: var(--color-teal);
     display: inline-flex;
     align-items: center;
@@ -1327,7 +1301,6 @@ button {
 .faq-item.open {
     background: #FFFFFF;
     border-color: var(--color-teal);
-    box-shadow: 0 6px 20px rgba(0, 160, 130, 0.08);
 }
 
 .faq-question-btn {
@@ -1417,7 +1390,8 @@ button {
 
 .newsletter-input:focus {
     border-color: var(--color-teal);
-    box-shadow: 0 0 0 3px rgba(0, 160, 130, 0.15);
+    outline: 2px solid var(--color-teal-hover);
+    outline-offset: 2px;
 }
 
 .newsletter-success-msg {
@@ -1563,7 +1537,6 @@ button {
 .business-hero-visual {
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Outdoor & Media Showcase on Negocios */
@@ -1579,7 +1552,6 @@ button {
     color: #FFFFFF;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    box-shadow: var(--shadow-xl);
     margin-bottom: 48px;
 }
 
@@ -1650,7 +1622,6 @@ button {
 
 .media-feature-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
 }
 
 .media-card-img-wrap {
@@ -1714,7 +1685,6 @@ button {
 .billing-toggle-btn.active {
     background: var(--color-teal);
     color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(0, 160, 130, 0.3);
 }
 
 .pricing-cards-grid {
@@ -1737,12 +1707,10 @@ button {
 
 .pricing-card-item:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
 }
 
 .pricing-card-item.featured {
     border-color: var(--color-teal);
-    box-shadow: 0 12px 35px rgba(0, 160, 130, 0.15);
 }
 
 .pricing-popular-badge {
@@ -1927,5 +1895,161 @@ button {
 
     .footer-top-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Hero original e carrossel compacto com toda a largura da página. */
+.hero-glovo-grid {
+    position: relative;
+}
+
+.hero-about-img {
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 110px;
+    height: auto;
+    object-fit: contain;
+}
+
+.section-brands {
+    padding-top: 28px;
+}
+
+.section-brands .section-title-wrap {
+    margin-bottom: 12px;
+}
+
+.food-carousel {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 0;
+    scrollbar-width: none;
+}
+
+.food-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.food-carousel-track {
+    display: flex;
+    width: max-content;
+    animation: food-banner-scroll 40s linear infinite;
+}
+
+.food-carousel-set {
+    display: flex;
+    flex-shrink: 0;
+    gap: 16px;
+    padding-right: 16px;
+}
+
+.food-banner-item {
+    display: block;
+    flex: 0 0 160px;
+    width: 160px;
+    align-self: flex-start;
+    border-radius: 20px;
+    transition: transform 0.25s ease-out;
+}
+
+.food-banner-item img {
+    width: 160px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.food-banner-item:hover {
+    transform: scale(1.05);
+}
+
+.food-carousel:hover .food-carousel-track,
+.food-carousel.is-paused .food-carousel-track {
+    animation-play-state: paused;
+}
+
+.food-carousel:focus-within .food-carousel-track {
+    animation: none;
+    transform: none;
+}
+
+.food-carousel-controls {
+    max-width: none;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.food-carousel-toggle {
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.food-carousel-toggle:hover {
+    background: var(--color-primary-yellow-light);
+    color: var(--color-text-main);
+}
+
+.food-banner-item:focus-visible,
+.food-carousel:focus-visible,
+.food-carousel-toggle:focus-visible {
+    outline: 3px solid var(--color-teal-hover);
+    outline-offset: 3px;
+}
+
+@keyframes food-banner-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(var(--food-carousel-offset, calc(-100% / 3)), 0, 0); }
+}
+
+@media (max-width: 768px) {
+    .hero-about-img {
+        width: 90px;
+    }
+
+    .food-banner-item {
+        flex-basis: 136px;
+        width: 136px;
+    }
+
+    .food-banner-item img {
+        width: 136px;
+        height: 170px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .food-carousel {
+        scrollbar-width: thin;
+    }
+
+    .food-carousel::-webkit-scrollbar {
+        display: block;
+        height: 6px;
+    }
+
+    .food-carousel-track {
+        animation: none;
+    }
+
+    .food-carousel-set[aria-hidden="true"],
+    .food-carousel-controls {
+        display: none;
+    }
+
+    .food-banner-item {
+        transition: none;
+    }
+
+    .food-banner-item:hover {
+        transform: none;
     }
 }
