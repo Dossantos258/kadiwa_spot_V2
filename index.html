@@ -166,6 +166,7 @@
                             <span>Explorar</span>
                         </button>
                     </form>
+                    <p class="location-feedback" id="home-location-status" role="status" aria-live="polite"></p>
 
                     <!-- Quick Filter Pills -->
                     <div class="hero-quick-pills" aria-label="Pesquisas populares">
@@ -406,15 +407,10 @@
             </div>
         </section>
 
-        <!-- Como funciona (Mint Green Section) -->
+        <!-- Como funciona -->
         <section class="section-partners-mint" id="como">
             <div class="container">
                 <div class="partners-header">
-                    <div class="partners-handshake-icon">
-                        <svg>
-                            <use href="#icon-handshake"></use>
-                        </svg>
-                    </div>
                     <h2>Como funciona</h2>
                     <p>Três passos simples para encontrar o seu próximo spot</p>
                 </div>
@@ -422,11 +418,6 @@
                 <div class="partners-cards-grid">
                     <!-- Card 1: Explorar -->
                     <article class="partner-card-item">
-                        <div class="partner-step-icon" aria-hidden="true">
-                            <svg>
-                                <use href="#icon-search"></use>
-                            </svg>
-                        </div>
                         <h3>Escolha um spot</h3>
                         <p>Pesquise por sabor, tipo de lugar ou zona e encontre opções para a sua próxima saída.</p>
                         <a class="btn btn-teal" href="pages/explorar.html">Explorar spots</a>
@@ -434,11 +425,6 @@
 
                     <!-- Card 2: Consultar -->
                     <article class="partner-card-item">
-                        <div class="partner-step-icon" aria-hidden="true">
-                            <svg>
-                                <use href="#icon-restaurant"></use>
-                            </svg>
-                        </div>
                         <h3>Veja antes de ir</h3>
                         <p>Consulte menus, horários, contactos e informações que ajudam a escolher o spot certo.</p>
                         <a class="btn btn-teal" href="pages/explorar.html">Ver destaques</a>
@@ -446,11 +432,6 @@
 
                     <!-- Card 3: Chegar -->
                     <article class="partner-card-item">
-                        <div class="partner-step-icon" aria-hidden="true">
-                            <svg>
-                                <use href="#icon-pin"></use>
-                            </svg>
-                        </div>
                         <h3>Chegue com facilidade</h3>
                         <p>Use a localização e os contactos do perfil para chegar ao spot que escolheu.</p>
                         <a class="btn btn-teal" href="#zonas">Ver zonas</a>
@@ -620,6 +601,7 @@
     </footer>
 
     <!-- Script -->
+    <script src="js/localizacao.js"></script>
     <script src="js/script.js"></script>
 </body>
 

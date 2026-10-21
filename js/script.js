@@ -207,42 +207,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-address');
 
     if (btnUseLocation && searchInput) {
-        btnUseLocation.addEventListener('click', () => {
-            if (!navigator.geolocation) {
-                alert('A geolocalização não é suportada pelo seu navegador. Digite a sua zona manualmente.');
-                searchInput.focus();
-                return;
-            }
-
+        btnUseLocation.addEventListener('click', async () => {
+            const status = document.getElementById('home-location-status');
             const originalBtnHtml = btnUseLocation.innerHTML;
             btnUseLocation.innerHTML = '<span>A detetar localização...</span>';
             btnUseLocation.disabled = true;
-
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude.toFixed(3);
-                    const lon = position.coords.longitude.toFixed(3);
-                    // Amigável identificação para Maputo/Moçambique
-                    searchInput.value = '📍 Maputo Central (Localização atual)';
-                    btnUseLocation.innerHTML = '<span>✓ Localização pronta!</span>';
-                    btnUseLocation.style.background = '#EBF8F5';
-                    btnUseLocation.style.color = '#00A082';
-
-                    setTimeout(() => {
-                        btnUseLocation.innerHTML = originalBtnHtml;
-                        btnUseLocation.disabled = false;
-                        btnUseLocation.style.background = '';
-                        btnUseLocation.style.color = '';
-                    }, 3500);
-                },
-                (error) => {
-                    btnUseLocation.innerHTML = originalBtnHtml;
-                    btnUseLocation.disabled = false;
-                    searchInput.value = 'Maputo, Polana';
-                    searchInput.focus();
-                },
-                { timeout: 8000 }
-            );
+            status.textContent = 'A pedir a sua localização ao navegador…';
+            try {
+                await window.KadiwaLocation.request();
+                const form = document.getElementById('location-search-form');
+                let nearby = form.querySelector('[name="perto"]');
+                if (!nearby) {
+                    nearby = document.createElement('input');
+                    nearby.type = 'hidden';
+                    nearby.name = 'perto';
+                    form.append(nearby);
+                }
+                nearby.value = '1';
+                status.textContent = 'Localização obtida. A procurar os spots mais próximos…';
+                form.requestSubmit();
+            } catch (error) {
+                status.textContent = window.KadiwaLocation.errorMessage(error);
+            } finally {
+                btnUseLocation.innerHTML = originalBtnHtml;
+                btnUseLocation.disabled = false;
+            }
         });
     }
 

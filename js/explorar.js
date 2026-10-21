@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterDialog = $('#filter-dialog');
     const mapDialog = $('#map-dialog');
     const detailsDialog = $('#detail-dialog');
+    const mediaDialog = $('#media-dialog');
+    let mainMap = null;
+    let detailMap = null;
+    let activeSpot = null;
+    let mediaItems = [];
+    let mediaIndex = 0;
+    const asset = file => `../media/imagens/${encodeURIComponent(file)}`;
     let filtered = [];
 
     // Manter a pesquisa visível e os resultados abaixo das duas faixas fixas.
@@ -53,15 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderMap(items) {
-        // Posições no esquema, sem coordenadas ou geolocalização fictícias.
-        const columns = 4;
-        const rows = Math.max(3, Math.ceil(items.length / columns));
-        $('#map-markers').innerHTML = items.map((item, index) => {
-            const x = 15 + (index % columns) * 21 + (Math.floor(index / columns) % 2 ? 3 : 0);
-            const y = 15 + Math.floor(index / columns) * (65 / Math.max(rows - 1, 1));
-            return `<button class="map-marker" type="button" style="left:${x}%;top:${y}%" data-details="${item.id}" aria-label="Local ilustrativo ${index + 1}: ${escape(item.name)}"><span>${index + 1}</span></button>`;
-        }).join('');
-        $('#map-count').textContent = `${items.length} ${items.length === 1 ? 'local ilustrado' : 'locais ilustrados'}`;
+        const located = items.filter(item => item.coordinates);
+        if (!mainMap) mainMap = window.KadiwaMaps.create($('#results-map'), { items, onSelect: item => openDetails(item.id), status: $('#results-map-status') });
+        else mainMap.setItems(items);
+        $('#map-count').textContent = `${located.length} de ${items.length} locais com ponto no mapa`;
+        $('#map-note').textContent = located.some(item => item.locationType === 'demo')
+            ? 'Pontos de demonstração na Matola. Os restantes endereços estão por confirmar.'
+            : 'Sem coordenadas confirmadas nesta selecção. Mapa de referência de Maputo e Matola.';
         $('#map-legend').innerHTML = items.map(item => `<li><button type="button" data-details="${item.id}">${escape(item.name)}</button></li>`).join('');
     }
 
@@ -123,17 +128,112 @@ document.addEventListener('DOMContentLoaded', () => {
     function openDetails(id) {
         const item = findSpot(id);
         if (!item) return;
+        detailMap?.destroy();
+        detailMap = null;
+        activeSpot = item;
+        const links = data.mapLinks(item);
+        const locationNote = item.locationType === 'demo' ? 'Ponto demonstrativo na Matola, escolhido para este protótipo. Não é um endereço comercial confirmado.'
+            : item.address ? 'Endereço transcrito do material fornecido. Confirme com o estabelecimento.'
+                : 'Endereço exacto por confirmar. O mapa mostra apenas a região de referência, sem marcador.';
         const facts = [
             ['Categoria', data.categoryLabel(item.category)], ['Zona', item.zone],
             ['Horário', item.open == null ? null : item.open ? 'Aberto (exemplo)' : 'Fechado (exemplo)'],
             ['Avaliação', item.rating == null ? null : `${number(item.rating)} / 5 (exemplo)`],
             ['Distância', item.distance == null ? null : `${number(item.distance)} km (exemplo)`],
-            ['Preço', item.price == null ? null : '$'.repeat(item.price)], ['Modalidade', item.mode]
+            ['Preço', item.price == null ? null : '$'.repeat(item.price)], ['Modalidade', item.mode],
+            ['Endereço', item.address], ['Contacto', item.phone]
         ];
-        $('#detail-content').innerHTML = `<img class="detail-image ${!item.photo && item.imageFit === 'contain' ? 'image-contain' : ''}" src="${photo(item)}" alt="Imagem ilustrativa de ${escape(data.categoryLabel(item.category).toLowerCase())}" width="640" height="360"><div class="detail-body"><h2 id="detail-title" tabindex="-1">${escape(item.name)}</h2>${item.description ? `<p>${escape(item.description)}</p>` : ''}<dl class="detail-facts">${facts.map(([title, value]) => `<div><dt>${title}</dt><dd>${escape(value ?? 'Não informado')}</dd></div>`).join('')}</dl><p class="prototype-note">Este é um exemplo do protótipo. Imagem ilustrativa; avaliações, horários e distâncias não foram verificados. Confirme os dados com o estabelecimento antes de sair.</p></div>`;
+        $('#detail-dialog-title').textContent = item.name;
+        $('#detail-content').innerHTML = `<div class="spot-detail-layout">
+            <div class="spot-detail-main">
+                <button class="detail-cover-button" type="button" data-photo-index="0" aria-label="Ampliar imagem de ${escape(item.name)}"><img class="detail-image ${!item.photo && item.imageFit === 'contain' ? 'image-contain' : ''}" src="${photo(item)}" alt="Imagem de apresentação de ${escape(item.name)}" width="760" height="480"><span>Ampliar foto</span></button>
+                <div class="detail-body"><p class="detail-category">${escape(data.categoryLabel(item.category))}${item.zone ? ` · ${escape(item.zone)}` : ''}</p><h2 id="detail-title" tabindex="-1">${escape(item.name)}</h2>
+                    <div class="detail-summary"><span>${item.rating == null ? 'Sem avaliação' : `★ ${number(item.rating)} / 5 · avaliação demonstrativa`}</span>${item.reviews ? `<span>${item.reviews} avaliações de exemplo</span>` : ''}</div>
+                    <div class="detail-tabs" role="tablist" aria-label="Explorar este spot">${[['info', 'Sobre o local'], ['menus', 'Ver menus'], ['photos', 'Imagens'], ['ratings', 'Avaliações']].map(([key, label], index) => `<button id="tab-${key}" type="button" role="tab" data-detail-tab="${key}" aria-controls="panel-${key}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${label}</button>`).join('')}</div>
+                    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" tabindex="0"><h3>Sobre o local</h3><p>${escape(item.description || 'Informações adicionais sobre este estabelecimento ainda não disponíveis.')}</p><dl class="detail-facts">${facts.map(([title, value]) => `<div><dt>${title}</dt><dd>${escape(value ?? 'Não informado')}</dd></div>`).join('')}</dl>${item.phone ? `<a class="text-button detail-contact" href="tel:${escape(item.phone)}">Ligar para o estabelecimento</a>` : ''}</section>
+                    <section id="panel-menus" role="tabpanel" aria-labelledby="tab-menus" tabindex="0" hidden><h3>Menus em imagens</h3><p class="detail-disclaimer">Exemplos visuais fornecidos para o protótipo. Os pratos, preços e contactos nestas imagens não foram confirmados para este spot.</p><div class="detail-menu-grid">${item.menus.map((menu, index) => `<button class="detail-menu-card" type="button" data-menu-index="${index}"><img src="${asset(menu.file)}" alt="${escape(menu.title)}" loading="lazy" width="350" height="450"><span>${escape(menu.title)}</span><small>Ampliar menu</small></button>`).join('')}</div></section>
+                    <section id="panel-photos" role="tabpanel" aria-labelledby="tab-photos" tabindex="0" hidden><h3>Imagens do spot</h3><p>Imagens de apresentação fornecidas para o catálogo.</p><div class="detail-gallery">${item.gallery.map((image, index) => `<button type="button" data-photo-index="${index}" aria-label="Ampliar ${escape(image.title)}"><img src="${asset(image.file)}" alt="${escape(image.title)} de ${escape(item.name)}" loading="lazy" width="500" height="350"></button>`).join('')}</div></section>
+                    <section id="panel-ratings" role="tabpanel" aria-labelledby="tab-ratings" tabindex="0" hidden><h3>Avaliações</h3>${item.rating == null ? '<p>Este spot ainda não tem avaliações disponíveis.</p>' : `<p class="detail-rating-value">★ ${number(item.rating)} <span>/ 5</span></p><p>${item.reviews ? `${item.reviews} avaliações demonstrativas.` : 'Classificação demonstrativa do catálogo.'}</p>`}<p>Não há comentários de visitantes publicados neste protótipo.</p></section>
+                    <p class="prototype-note">Catálogo de demonstração. Fotografias, menus, horários e avaliações não constituem informação comercial verificada.</p>
+                </div>
+            </div>
+            <aside class="spot-detail-location" aria-label="Localização de ${escape(item.name)}"><h3>Localização</h3><p>${escape(item.address || item.zone || 'Endereço por confirmar')}</p><div class="real-map detail-real-map" id="detail-map" aria-label="Mapa de referência de ${escape(item.name)}"></div><p class="map-load-status" id="detail-map-status" role="status"></p><p class="detail-location-note">${locationNote}</p><div class="detail-location-actions"><a class="btn btn-teal" href="${escape(links.directions || links.search)}" target="_blank" rel="noopener noreferrer">${links.directions ? 'Ver direções' : 'Pesquisar localização'}</a><button class="small-button" type="button" data-copy-location>${links.hasLocation ? 'Copiar localização' : 'Copiar pesquisa no mapa'}</button><a class="text-button" href="${escape(links.search)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div><p class="copy-location-status" id="copy-location-status" role="status" aria-live="polite"></p><div id="copy-location-fallback" hidden><label for="location-text">Selecione e copie a localização:</label><textarea id="location-text" readonly></textarea></div></aside>
+        </div>`;
         showDialog(detailsDialog);
+        detailMap = window.KadiwaMaps.create($('#detail-map'), { items: [item], status: $('#detail-map-status') });
+        requestAnimationFrame(() => detailMap?.resize());
         $('#detail-title').focus();
     }
+
+    function selectDetailTab(key, focus = false) {
+        $$('[data-detail-tab]').forEach(button => {
+            const selected = button.dataset.detailTab === key;
+            button.setAttribute('aria-selected', String(selected));
+            button.tabIndex = selected ? 0 : -1;
+            $(`#panel-${button.dataset.detailTab}`).hidden = !selected;
+            if (selected && focus) button.focus();
+        });
+    }
+
+    function renderMedia() {
+        const image = mediaItems[mediaIndex];
+        $('#media-title').textContent = image.title;
+        $('#media-image').src = asset(image.file);
+        $('#media-image').alt = image.title;
+        $('#media-original').href = asset(image.file);
+        $('#media-count').textContent = `${mediaIndex + 1} / ${mediaItems.length}`;
+        $$('[data-media-direction]').forEach(button => { button.hidden = mediaItems.length < 2; });
+    }
+
+    function openMedia(items, index) {
+        mediaItems = items;
+        mediaIndex = index;
+        renderMedia();
+        showDialog(mediaDialog);
+    }
+
+    detailsDialog.addEventListener('click', async event => {
+        const tab = event.target.closest('[data-detail-tab]');
+        if (tab) selectDetailTab(tab.dataset.detailTab);
+        const menu = event.target.closest('[data-menu-index]');
+        if (menu) openMedia(activeSpot.menus, Number(menu.dataset.menuIndex));
+        const image = event.target.closest('[data-photo-index]');
+        if (image) openMedia(activeSpot.gallery, Number(image.dataset.photoIndex));
+        if (event.target.closest('[data-copy-location]')) {
+            const text = data.mapLinks(activeSpot).copyText;
+            try {
+                if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+                await navigator.clipboard.writeText(text);
+                $('#copy-location-status').textContent = 'Localização copiada.';
+            } catch {
+                $('#copy-location-fallback').hidden = false;
+                $('#location-text').value = text;
+                $('#location-text').focus();
+                $('#location-text').select();
+                $('#copy-location-status').textContent = 'A cópia automática não está disponível. Copie o texto selecionado.';
+            }
+        }
+    });
+    detailsDialog.addEventListener('keydown', event => {
+        const tab = event.target.closest('[data-detail-tab]');
+        if (!tab || !['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const tabs = $$('[data-detail-tab]');
+        const current = tabs.indexOf(tab);
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        selectDetailTab(tabs[next].dataset.detailTab, true);
+    });
+    detailsDialog.addEventListener('close', () => { detailMap?.destroy(); detailMap = null; });
+    function stepMedia(direction) {
+        mediaIndex = (mediaIndex + direction + mediaItems.length) % mediaItems.length;
+        renderMedia();
+    }
+    $$('[data-media-direction]').forEach(button => button.addEventListener('click', () => stepMedia(Number(button.dataset.mediaDirection))));
+    mediaDialog.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        stepMedia(event.key === 'ArrowRight' ? 1 : -1);
+    });
 
     $('#explore-form').addEventListener('submit', event => {
         event.preventDefault();
@@ -212,10 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#expanded-map-host').append($('#map-panel'));
         $('#map-legend').hidden = false;
         showDialog(mapDialog);
+        requestAnimationFrame(() => mainMap?.resize());
     }));
     mapDialog.addEventListener('close', () => {
         $('#desktop-map-host').append($('#map-panel'));
         $('#map-legend').hidden = true;
+        requestAnimationFrame(() => mainMap?.resize());
     });
     $$('[data-close-dialog]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
     $$('dialog').forEach(dialog => {

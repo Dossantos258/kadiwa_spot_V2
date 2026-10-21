@@ -2,21 +2,11 @@
 
 /* Fonte local de destaque; os textos e controlos mantêm a tipografia de leitura. */
 @font-face {
-    font-family: 'Food Marker';
-    src: url('../fonts/food-marker/FoodMarkerDemo.otf') format('opentype');
+    font-family: 'Sauce Tomato';
+    src: url('../fonts/sauce-tomato/Sauce Tomato.otf') format('opentype');
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-}
-
-/* Detalhes cursivos: apenas caracteres presentes na versão local da fonte. */
-@font-face {
-    font-family: 'Royal Maison Script';
-    src: url('../fonts/royal-maison/Royal Maison Script.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    unicode-range: U+0020-005F, U+0061-007A;
 }
 
 /* ==========================================================================
@@ -64,8 +54,7 @@
 
     /* Typography & Layout */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: 'Food Marker', 'Inter', sans-serif;
-    --font-script: 'Royal Maison Script', cursive;
+    --font-display: 'Sauce Tomato', Georgia, serif;
     --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1203,7 +1192,7 @@ button {
    METER MÃOS À OBRA, JUNTOS (Mint green parcerias)
    ========================================================================== */
 .section-partners-mint {
-    background: var(--color-teal-light);
+    background: #FFFFFF;
     padding: 80px 0;
     position: relative;
 }
@@ -1743,17 +1732,16 @@ button {
 
 .pricing-popular-badge {
     position: absolute;
-    top: -17px;
+    top: -14px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--color-teal);
     color: #FFFFFF;
-    font-family: var(--font-script);
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 1.2;
-    white-space: nowrap;
-    padding: 2px 16px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 16px;
     border-radius: var(--radius-pill);
 }
 
@@ -1777,15 +1765,6 @@ button {
     font-size: 40px;
     font-weight: 900;
     color: #1A1A1A;
-}
-
-.plan-price-box .plan-amount {
-    font-family: var(--font-script);
-    color: var(--color-dark);
-    font-size: clamp(32px, 3vw, 40px);
-    font-weight: 400;
-    line-height: 1.3;
-    display: inline-block;
 }
 
 .plan-price-box span {

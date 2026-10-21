@@ -6,6 +6,7 @@
     <meta name="description" content="Descubra restaurantes, cafés, padarias e takeaways no Kadiwa Spot. Explore o protótipo de pesquisa e descoberta.">
     <meta name="theme-color" content="#FFC244">
     <title>Explorar spots | Kadiwa Spot</title>
+    <link rel="stylesheet" href="../css/vendor/leaflet/leaflet.css">
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/explorar.css">
 </head>
@@ -130,7 +131,7 @@
                         <div class="section-heading-row"><h2>Filtros</h2><button class="text-button" type="button" data-clear>Limpar tudo</button></div>
                         <fieldset><legend>Categoria</legend><label class="check-option"><input type="checkbox" name="category" value="fast-food"><span>Fast-food</span></label><label class="check-option"><input type="checkbox" name="category" value="restaurante"><span>Restaurantes</span></label><label class="check-option"><input type="checkbox" name="category" value="cafe"><span>Cafés</span></label><label class="check-option"><input type="checkbox" name="category" value="padaria"><span>Padarias</span></label><label class="check-option"><input type="checkbox" name="category" value="pizza"><span>Pizza</span></label><label class="check-option"><input type="checkbox" name="category" value="delivery"><span>Delivery</span></label><label class="check-option"><input type="checkbox" name="category" value="takeaway"><span>Takeaway</span></label></fieldset>
                         <fieldset><legend>Localização</legend><label class="sr-only" for="filter-location">Bairro ou zona</label><div class="input-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg><input id="filter-location" name="location" type="search" placeholder="Bairro ou zona..." list="explore-zones" autocomplete="off"></div></fieldset>
-                        <fieldset><legend>Preço</legend><div class="segment-options" aria-label="Faixa de preço"><button type="button" data-price="1" aria-pressed="false" aria-label="Faixa de preço 1">$</button><button type="button" data-price="2" aria-pressed="false" aria-label="Faixa de preço 2">$$</button><button type="button" data-price="3" aria-pressed="false" aria-label="Faixa de preço 3">$$$</button><button type="button" data-price="4" aria-pressed="false" aria-label="Faixa de preço 4">$$$$</button></div></fieldset>
+                        <fieldset><legend>Preço mínimo</legend><div class="segment-options price-options" aria-label="Filtrar pelo preço mínimo em MZN"><button type="button" data-price="1" aria-pressed="false">Até 300 MZN</button><button type="button" data-price="2" aria-pressed="false">300–600 MZN</button><button type="button" data-price="3" aria-pressed="false">600–1.000 MZN</button><button type="button" data-price="4" aria-pressed="false">Mais de 1.000 MZN</button></div><p class="filter-note">Valores demonstrativos. Filtrar pelo mínimo de cada spot.</p></fieldset>
                         <fieldset><legend class="sr-only">Horário</legend><label class="switch-option" for="open-now"><span>Aberto agora</span><input id="open-now" name="open" type="checkbox" role="switch"></label></fieldset>
                         <fieldset><legend>Avaliação mínima</legend><div class="segment-options"><button type="button" data-rating="3" aria-pressed="false" aria-label="Avaliação mínima 3">3 ★</button><button type="button" data-rating="3.5" aria-pressed="false" aria-label="Avaliação mínima 3.5">3,5 ★</button><button type="button" data-rating="4" aria-pressed="false" aria-label="Avaliação mínima 4">4 ★</button><button type="button" data-rating="4.5" aria-pressed="false" aria-label="Avaliação mínima 4.5">4,5 ★</button></div></fieldset>
                         <p class="filter-note">Os filtros usam apenas os dados disponíveis nos exemplos.</p>
@@ -193,8 +194,8 @@
                     <div class="spots-empty" id="spots-empty" hidden><h3>Nenhum spot encontrado</h3><p>Tente outro nome, categoria ou zona.</p><button class="btn btn-teal" type="button" data-clear>Limpar filtros</button></div>
                     <div class="load-more"><p id="results-shown"></p><button class="small-button" type="button" id="load-more">Ver mais resultados</button></div>
                 </div>
-                <aside class="explore-map-sidebar" aria-label="Mapa ilustrativo dos resultados"><div id="desktop-map-host">
-                    <div class="map-panel" id="map-panel"><div class="demo-map" id="demo-map" aria-label="Esquema ilustrativo dos estabelecimentos"><span class="map-area-label" aria-hidden="true">Mapa ilustrativo</span><div id="map-markers"></div></div><div class="map-panel-info"><p id="map-count">6 locais ilustrados</p><p>Posições esquemáticas, sem localização real.</p><button class="small-button" type="button" data-open-map><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Ver mapa completo</button></div><ol class="map-legend" id="map-legend" hidden></ol></div>
+                <aside class="explore-map-sidebar" aria-label="Mapa dos resultados"><div id="desktop-map-host">
+                    <div class="map-panel" id="map-panel"><div class="real-map" id="results-map" aria-label="Mapa de Maputo e Matola"></div><div class="map-panel-info"><p id="map-count"></p><p id="map-note">Mapa real com pontos de demonstração identificados.</p><p class="map-load-status" id="results-map-status" role="status"></p><button class="small-button" type="button" data-open-map>Ver mapa completo</button></div><ol class="map-legend" id="map-legend" hidden></ol></div>
                 </div></aside>
             </div>
         </section>
@@ -424,7 +425,11 @@
     <dialog class="explore-dialog filter-dialog" id="filter-dialog" aria-labelledby="filter-dialog-title"><div class="dialog-heading"><h2 id="filter-dialog-title">Filtrar spots</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar filtros">×</button></div><div id="mobile-filter-host"></div><div class="dialog-actions"><button class="btn btn-teal" type="button" data-close-dialog>Ver resultados</button></div></dialog>
     <dialog class="explore-dialog map-dialog" id="map-dialog" aria-labelledby="map-dialog-title"><div class="dialog-heading"><h2 id="map-dialog-title">Mapa dos resultados</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar mapa">×</button></div><div id="expanded-map-host"></div></dialog>
     <dialog class="explore-dialog detail-dialog" id="detail-dialog" aria-labelledby="detail-dialog-title"><div class="dialog-heading"><h2 id="detail-dialog-title">Detalhes do spot</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar detalhes">×</button></div><div id="detail-content"></div></dialog>
+    <dialog class="explore-dialog media-dialog" id="media-dialog" aria-labelledby="media-title"><div class="dialog-heading"><h2 id="media-title">Imagem do spot</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar imagem">×</button></div><div class="media-image-wrap"><img id="media-image" alt="" width="900" height="1200"></div><div class="media-controls"><button class="small-button" type="button" data-media-direction="-1" aria-label="Imagem anterior">Anterior</button><p id="media-count" role="status" aria-live="polite"></p><button class="small-button" type="button" data-media-direction="1" aria-label="Próxima imagem">Seguinte</button><a id="media-original" class="text-button" target="_blank" rel="noopener noreferrer">Abrir imagem original</a></div></dialog>
 
+    <script src="../js/vendor/leaflet/leaflet.js" defer></script>
+    <script src="../js/spot-mapas.js" defer></script>
+    <script src="../js/localizacao.js" defer></script>
     <script src="../js/script.js" defer></script>
     <script src="../js/explorar-dados.js" defer></script>
     <script src="../js/explorar.js" defer></script>

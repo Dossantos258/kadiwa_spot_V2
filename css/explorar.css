@@ -129,7 +129,7 @@
 .spot-rating > span { color: var(--color-text-muted); font-weight: 400; }
 .spot-card-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-top: 4px; font-size: 12px; line-height: 1.5; color: var(--color-text-muted); }
 .spot-card-meta > * + *::before { content: '·'; margin-right: 6px; color: var(--color-text-muted); }
-.spot-price strong { color: var(--color-dark); font-family: var(--font-script); font-size: 20px; line-height: 1.2; font-weight: 400; }
+.spot-price strong { color: var(--color-dark); font-weight: 600; }
 .load-more { text-align: center; margin-top: 22px; }
 .load-more p { color: var(--color-text-muted); font-size: 11px; margin-bottom: 10px; }
 .load-more .small-button { padding-inline: 22px; min-height: 40px; }
@@ -137,13 +137,7 @@
 .spots-empty h3 { font-size: 19px; }
 .spots-empty p { font-size: 13px; color: var(--color-text-muted); margin: 10px 0 18px; }
 .map-panel { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
-.demo-map { position: relative; height: 340px; overflow: hidden; background-color: #e9eeeb; background-image: linear-gradient(21deg, transparent 35%, #fff 35%, #fff 38%, transparent 38%), linear-gradient(108deg, transparent 53%, #fff 53%, #fff 56%, transparent 56%), linear-gradient(rgb(255 255 255 / 75%) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 75%) 1px, transparent 1px); background-size: auto, auto, 28px 28px, 28px 28px; }
-.demo-map::before { content: ''; position: absolute; top: -20px; bottom: -20px; right: -52px; width: 95px; transform: rotate(-12deg); background: #cee7e5; border-left: 5px solid #fff; }
-.explore-map-sidebar .demo-map { height: clamp(360px, calc(100dvh - var(--explore-sticky-offset) - 120px), 600px); }
-.map-area-label { position: absolute; bottom: 12px; right: 10px; padding: 4px 8px; background: rgb(255 255 255 / 90%); color: #52625e; font-size: 9px; border-radius: 4px; }
-.map-marker { position: absolute; width: 27px; height: 27px; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; border-radius: 50% 50% 50% 0; transform: translate(-50%, -50%) rotate(-45deg); color: #fff; background: var(--color-teal-hover); }
-.map-marker span { transform: rotate(45deg); font-size: 10px; font-weight: 700; }
-.map-marker:hover { background: var(--color-dark); }
+.explore-map-sidebar .real-map { height: clamp(360px, calc(100dvh - var(--explore-sticky-offset) - 120px), 600px); }
 .map-panel-info { padding: 13px; }
 .map-panel-info p { font-size: 10px; color: var(--color-text-muted); margin-bottom: 6px; }
 .map-panel-info > p:first-child { color: var(--color-text-secondary); font-weight: 600; }
@@ -168,7 +162,6 @@
 .spot-card-compact h3 { font-size: 12px; font-weight: 600; }
 .spot-card-compact .spot-subtitle { font-size: 11px; }
 .spot-card-compact .spot-rating, .spot-card-compact .spot-card-meta { font-size: 11px; }
-.spot-card-compact .spot-price strong { font-size: 18px; }
 .spot-card-compact .spot-tag { top: 9px; left: 9px; max-width: calc(100% - 18px); border-radius: 14px; padding: 6px 9px; font-size: 10px; }
 .explore-business { background: var(--color-dark); padding: 24px 0; color: #fff; text-align: center; }
 .explore-business .container { max-width: 720px; }
@@ -192,7 +185,7 @@
 .filter-dialog .filter-panel > .section-heading-row { margin-bottom: 12px; justify-content: flex-end; }
 .map-dialog { width: min(850px, calc(100% - 32px)); }
 .map-dialog .map-panel { border: none; border-radius: 0; }
-.map-dialog .demo-map { height: min(48dvh, 430px); }
+.map-dialog .real-map { height: min(48dvh, 430px); }
 .map-dialog [data-open-map] { display: none; }
 .map-legend { padding: 0 22px 22px; list-style-position: inside; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; }
 .map-legend button { font-size: 12px; color: var(--color-teal-hover); text-align: left; text-decoration: underline; text-underline-offset: 3px; }
@@ -206,6 +199,74 @@
 .detail-facts dd { font-size: 13px; font-weight: 600; }
 .detail-body .prototype-note { font-size: 11px; line-height: 1.7; margin-bottom: 0; }
 body.has-modal { overflow: hidden; }
+
+/* Mapas reais e apresentação do estabelecimento. */
+.real-map { position: relative; height: 340px; isolation: isolate; z-index: 0; background: #f1f3f2; font-family: var(--font-family); }
+.real-map .leaflet-control, .real-map .leaflet-tooltip, .real-map .leaflet-popup-content-wrapper, .real-map .leaflet-popup-tip { box-shadow: none; }
+.real-map .leaflet-control-zoom { border: 1px solid #cfd5d9; }
+.real-map .leaflet-control-attribution { font-size: 9px; }
+.spot-map-pin { display: grid; place-items: center; border: 2px solid #fff; border-radius: 50%; color: #fff; background: var(--color-teal-hover); font: 600 12px var(--font-family); }
+.spot-map-pin:focus-visible { outline: 3px solid var(--color-dark); outline-offset: 3px; }
+.map-load-status { font-size: 12px; color: var(--color-text-muted); }
+.map-load-status:empty { display: none; }
+.map-unavailable { padding: 24px; font-size: 13px; }
+.detail-dialog { width: min(1120px, calc(100% - 32px)); }
+.detail-dialog > .dialog-heading { position: sticky; top: 0; z-index: 2; }
+.spot-detail-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr); align-items: start; }
+.spot-detail-main { min-width: 0; border-right: 1px solid var(--color-border); }
+.detail-cover-button { position: relative; display: block; width: 100%; text-align: left; }
+.detail-cover-button .detail-image { height: 310px; }
+.detail-cover-button > span { position: absolute; bottom: 14px; right: 14px; padding: 7px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: #fff; font-size: 12px; }
+.detail-body .detail-category { color: var(--color-text-muted); font-size: 12px; margin: 0 0 5px; }
+.detail-body h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
+#detail-title:focus { outline: none; }
+.detail-summary { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--color-text-secondary); }
+.detail-tabs { display: flex; gap: 20px; overflow-x: auto; margin: 20px 0; border-bottom: 1px solid var(--color-border); }
+.detail-tabs button { padding: 10px 0; border-bottom: 2px solid transparent; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.detail-tabs button[aria-selected="true"] { border-bottom-color: var(--color-teal-hover); color: var(--color-teal-hover); }
+.detail-body [role="tabpanel"] h3 { font-size: 18px; margin-bottom: 10px; }
+.detail-body [role="tabpanel"] > p { font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 16px; }
+.detail-facts dd { overflow-wrap: anywhere; }
+.detail-contact { margin-top: 14px; }
+.detail-menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.detail-menu-card { min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; text-align: left; }
+.detail-menu-card img { width: 100%; height: 240px; object-fit: contain; background: #f5f5f3; padding: 8px; }
+.detail-menu-card > span { display: block; font-size: 12px; font-weight: 600; padding: 10px 12px 3px; }
+.detail-menu-card small { display: block; font-size: 11px; padding: 0 12px 12px; color: var(--color-teal-hover); }
+.detail-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.detail-gallery img { width: 100%; height: 230px; object-fit: cover; border-radius: var(--radius-md); }
+.detail-body .detail-rating-value { color: var(--color-dark); font-size: 32px; font-weight: 700; margin-bottom: 6px; }
+.detail-rating-value span { font-size: 16px; font-weight: 400; }
+.spot-detail-location { position: sticky; top: 80px; min-width: 0; padding: 22px; }
+.spot-detail-location > h3 { font-size: 18px; margin-bottom: 6px; }
+.spot-detail-location > p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+.detail-real-map { height: 320px; margin: 16px 0 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.spot-detail-location .detail-location-note { font-size: 11px; color: var(--color-text-muted); }
+.detail-location-actions { display: flex; flex-direction: column; align-items: stretch; gap: 9px; margin-top: 16px; }
+.detail-location-actions .btn, .detail-location-actions .small-button { justify-content: center; font-size: 13px; }
+.detail-location-actions > .text-button { align-self: center; margin-top: 4px; }
+.copy-location-status { margin-top: 12px; }
+#copy-location-fallback { margin-top: 10px; font-size: 12px; }
+#location-text { display: block; width: 100%; min-height: 110px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 10px; margin-top: 6px; font-size: 12px; resize: vertical; }
+.media-dialog { width: min(1000px, calc(100% - 24px)); }
+.media-image-wrap { padding: 12px; background: #f5f5f3; }
+.media-image-wrap img { width: 100%; height: min(70dvh, 1000px); object-fit: contain; }
+.media-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 12px 18px; }
+.media-controls p { font-size: 12px; }
+@media (max-width: 767px) {
+    .detail-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); }
+    .spot-detail-layout { grid-template-columns: 1fr; }
+    .spot-detail-main { border-right: 0; }
+    .detail-cover-button .detail-image { height: 230px; }
+    .detail-body, .spot-detail-location { padding: 18px; }
+    .spot-detail-location { position: static; border-top: 1px solid var(--color-border); }
+    .detail-tabs { gap: 18px; }
+    .detail-real-map { height: 280px; }
+    .detail-menu-card img { height: 190px; }
+    .detail-gallery { grid-template-columns: 1fr; }
+    .detail-dialog .dialog-heading, .media-dialog .dialog-heading { padding: 12px 16px; }
+    .detail-dialog .dialog-heading h2, .media-dialog .dialog-heading h2 { font-size: 16px; }
+}
 @media (max-width: 1199px) and (min-width: 900px) {
     .explore-layout { grid-template-columns: minmax(0, 1fr) 280px; gap: 18px; }
     .explore-sidebar { display: none; }
