@@ -59,23 +59,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
     if (mobileToggle && navLinks) {
+        const closeMenu = () => {
+            navLinks.classList.remove('is-open');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            mobileToggle.setAttribute('aria-label', 'Abrir menu móvel');
+        };
         mobileToggle.addEventListener('click', () => {
-            const isOpen = navLinks.style.display === 'flex';
-            if (isOpen) {
-                navLinks.style.display = 'none';
-                mobileToggle.setAttribute('aria-expanded', 'false');
-            } else {
-                navLinks.style.display = 'flex';
-                mobileToggle.setAttribute('aria-expanded', 'true');
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '76px';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.background = header ? getComputedStyle(header).backgroundColor : '#FFFFFF';
-                navLinks.style.padding = '24px';
+            const isOpen = navLinks.classList.toggle('is-open');
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileToggle.setAttribute('aria-label', isOpen ? 'Fechar menu móvel' : 'Abrir menu móvel');
+        });
+        navLinks.addEventListener('click', event => {
+            if (event.target.closest('a')) closeMenu();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && navLinks.classList.contains('is-open')) {
+                closeMenu();
+                mobileToggle.focus();
             }
         });
+        document.addEventListener('click', event => {
+            if (!header.contains(event.target)) closeMenu();
+        });
+        matchMedia('(min-width: 1101px)').addEventListener('change', closeMenu);
     }
 
     /* ==========================================================================

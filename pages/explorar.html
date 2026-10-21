@@ -1,272 +1,432 @@
 <!DOCTYPE html>
 <html lang="pt-MZ">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore restaurantes, cafés, fast-foods e takeaways no Kadiwa Spot.">
+    <meta name="description" content="Descubra restaurantes, cafés, padarias e takeaways no Kadiwa Spot. Explore o protótipo de pesquisa e descoberta.">
     <meta name="theme-color" content="#FFC244">
     <title>Explorar spots | Kadiwa Spot</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/explorar.css">
 </head>
-
 <body class="explore-page">
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
-
+    <svg class="svg-sprite" aria-hidden="true"><symbol id="icon-pin" viewBox="0 0 24 24">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol><symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </symbol><symbol id="icon-search" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none" />
+            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </symbol><symbol id="icon-chevron-left" viewBox="0 0 24 24">
+            <path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol><symbol id="icon-chevron-right" viewBox="0 0 24 24">
+            <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+        </symbol><symbol id="icon-restaurant" viewBox="0 0 24 24">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8ZM6 1v3M10 1v3M14 1v3"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </symbol><symbol id="icon-route" viewBox="0 0 24 24">
+            <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+            <circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+            <circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol><symbol id="icon-shopping-bag" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <path d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+            <path d="M16 10a4 4 0 0 1-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+        </symbol><symbol id="icon-megaphone" viewBox="0 0 24 24">
+            <path d="m3 11 16-6v14L3 13Z" stroke="currentColor" stroke-width="2" fill="none" />
+            <path d="m7 14 2 6h4l-2-7" stroke="currentColor" stroke-width="2" fill="none" />
+        </symbol></svg>
     <header class="glovo-header" id="top">
         <div class="container nav-wrap">
             <a class="brand-link" href="../index.html" aria-label="Kadiwa Spot Início">
                 <img class="header-logo" src="../media/imagens/logo.png" alt="Kadiwa Spot">
             </a>
 
-            <nav class="nav-links" aria-label="Menu principal">
+            <nav id="primary-navigation" class="nav-links" aria-label="Menu principal">
                 <a href="../index.html">Início</a>
-                <a class="active" href="explorar.html">Explorar</a>
+                <a href="../index.html#publicidade">Publicidade</a>
+                <a class="active" aria-current="page" href="explorar.html">Restaurantes & Takeaway</a>
                 <a href="../index.html#como">Como funciona</a>
                 <a href="negocios.html">Para negócios</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="../index.html#faq">FAQ</a>
             </nav>
 
             <div class="header-actions">
-                <a class="btn btn-teal btn-sm" href="negocios.html">Registar espaço</a>
-                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" id="mobile-toggle">
+                <a class="btn btn-teal btn-sm" href="negocios.html">Registar / Começar</a>
+                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" aria-controls="primary-navigation" id="mobile-toggle" type="button">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
-
-    <main id="conteudo">
-        <section class="explore-hero" aria-labelledby="explore-title">
-            <div class="container">
-                <div class="explore-heading">
-                    <p class="explore-kicker">Descobrir spots</p>
-                    <h1 id="explore-title">Encontre o spot certo</h1>
-                    <p>Pesquise por nome, tipo de comida ou zona. Depois compare as informações antes de sair.</p>
-                </div>
-
-                <!-- Pesquisa e filtros principais -->
+    <section class="explore-hero" aria-labelledby="explore-title">
+        <div class="container explore-heading">
+            <h1 id="explore-title">Encontre o seu próximo spot.</h1>
+            <p>Restaurantes, cafés, padarias e fast-foods para descobrir, comparar e escolher.</p>
+        </div>
+    </section>
+    <div class="explore-search-bar">
+        <div class="container">
                 <form class="explore-search" id="explore-form" role="search">
                     <div class="explore-field explore-field-search">
                         <label for="spot-search">O que procura?</label>
-                        <input id="spot-search" name="q" type="search"
-                            placeholder="Restaurante, grelhados, café..." autocomplete="off">
+                        <div class="input-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg><input id="spot-search" name="q" type="search" placeholder="Restaurante, fast-food, café..." autocomplete="off"></div>
                     </div>
-
-                    <div class="explore-field">
-                        <label for="spot-zone">Zona</label>
-                        <select id="spot-zone" name="zona">
-                            <option value="todas">Todas as zonas</option>
-                            <option value="Maputo Central">Maputo Central</option>
-                            <option value="Polana">Polana</option>
-                            <option value="Sommerschield">Sommerschield</option>
-                            <option value="Costa do Sol">Costa do Sol</option>
-                            <option value="Matola">Matola</option>
-                        </select>
+                    <div class="explore-field explore-field-location">
+                        <label for="spot-zone">Localização</label>
+                        <div class="input-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg><input id="spot-zone" name="zona" type="search" placeholder="Bairro ou zona..." list="explore-zones" autocomplete="off"></div>
                     </div>
-
-                    <label class="open-filter" for="open-now">
-                        <input id="open-now" type="checkbox">
-                        <span>Aberto agora</span>
-                    </label>
-
                     <button class="btn btn-teal explore-submit" type="submit">Pesquisar</button>
                 </form>
-            </div>
-        </section>
-
-        <section class="explore-results" aria-labelledby="results-title">
+                <datalist id="explore-zones"><option value="Maputo Central"><option value="Polana"><option value="Sommerschield"><option value="Costa do Sol"><option value="Matola"></datalist>
+        </div>
+    </div>
+    <main id="conteudo">
+        <div class="explore-search-options">
             <div class="container">
-                <div class="explore-toolbar">
-                    <div>
-                        <h2 id="results-title">Spots para conhecer</h2>
-                        <p id="results-count" aria-live="polite">8 spots encontrados</p>
-                    </div>
-                    <button class="clear-filters" id="clear-filters" type="button">Limpar filtros</button>
+                <div class="quick-filters" aria-label="Filtros rápidos">
+                    <button type="button" class="filter-pill" data-quick="nearby" aria-pressed="false">Perto de mim</button>
+                    <button type="button" class="filter-pill" data-quick="open" aria-pressed="false">Aberto agora</button>
+                    <button type="button" class="filter-pill" data-quick="top" aria-pressed="false">Melhor avaliados</button>
                 </div>
+                <p class="prototype-note">Protótipo · Informações, distâncias e imagens demonstrativas.</p>
+                <noscript><p class="prototype-note">Ative o JavaScript para pesquisar, filtrar e consultar os detalhes.</p></noscript>
+            </div>
+        </div>
 
-                <!-- Categorias do Low-Fidelity, adaptadas à linguagem do Kadiwa -->
-                <div class="category-filters" aria-label="Filtrar por categoria">
-                    <button class="category-filter active" type="button" data-category="todos">Todos</button>
-                    <button class="category-filter" type="button" data-category="restaurante">Restaurantes</button>
-                    <button class="category-filter" type="button" data-category="cafe">Cafés</button>
-                    <button class="category-filter" type="button" data-category="fast-food">Fast-food</button>
-                    <button class="category-filter" type="button" data-category="takeaway">Takeaway</button>
+        <section class="explore-categories" aria-label="Categorias de estabelecimentos">
+            <div class="container"><div class="category-filters"><button class="category-filter active" type="button" data-category="todos" aria-pressed="true">Todos</button><button class="category-filter" type="button" data-category="fast-food" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shopping-bag"></use></svg>Fast-food</button><button class="category-filter" type="button" data-category="restaurante" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-restaurant"></use></svg>Restaurantes</button><button class="category-filter" type="button" data-category="cafe" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-restaurant"></use></svg>Cafés</button><button class="category-filter" type="button" data-category="padaria" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shopping-bag"></use></svg>Padarias</button><button class="category-filter" type="button" data-category="pizza" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-target"></use></svg>Pizza</button><button class="category-filter" type="button" data-category="delivery" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-route"></use></svg>Delivery</button><button class="category-filter" type="button" data-category="takeaway" aria-pressed="false"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shopping-bag"></use></svg>Takeaway</button></div></div>
+        </section>
+
+        <section class="explore-weekly" aria-labelledby="weekly-title" aria-roledescription="carrossel">
+            <div class="container">
+                <div class="section-heading-row weekly-heading">
+                    <h2 id="weekly-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg> Destaques da semana</h2>
+                    <div class="weekly-controls"><div class="weekly-dots" aria-label="Escolher anúncio"><button class="weekly-dot" type="button" data-slide="0" aria-pressed="true" aria-label="Mostrar anúncio 1"></button><button class="weekly-dot" type="button" data-slide="1" aria-pressed="false" aria-label="Mostrar anúncio 2"></button><button class="weekly-dot" type="button" data-slide="2" aria-pressed="false" aria-label="Mostrar anúncio 3"></button><button class="weekly-dot" type="button" data-slide="3" aria-pressed="false" aria-label="Mostrar anúncio 4"></button><button class="weekly-dot" type="button" data-slide="4" aria-pressed="false" aria-label="Mostrar anúncio 5"></button></div><button class="text-button" id="weekly-toggle" type="button" aria-pressed="false">Pausar anúncios</button></div>
                 </div>
-
-                <p class="prototype-note">Conteúdo demonstrativo para apresentar a experiência de exploração.</p>
-
-                <div class="spots-grid" id="spots-grid">
-                    <article class="spot-card" data-name="Kadiwa Grill grelhados pratos mocambicanos"
-                        data-category="restaurante" data-zone="Polana" data-open="true">
-                        <img class="spot-image-contain" src="../media/imagens/spot1.jpeg"
-                            alt="Prato de biryani anunciado por um restaurante em Maputo" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Polana</span></div>
-                            <h3>Kadiwa Grill</h3>
-                            <p>Grelhados e pratos moçambicanos.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
-                                <div><dt>Ideal para</dt><dd>Almoço e jantar</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Cafe Acacia cafe pequeno almoco pastelaria"
-                        data-category="cafe" data-zone="Sommerschield" data-open="true">
-                        <img src="../media/imagens/airport-waiting-room.jpg"
-                            alt="Interior de um restaurante em Maputo" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Sommerschield</span></div>
-                            <h3>Café Acácia</h3>
-                            <p>Café, pequeno-almoço e pastelaria.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Café</dd></div>
-                                <div><dt>Ideal para</dt><dd>Pequeno-almoço</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Bistro Central cafe refeicoes ligeiras"
-                        data-category="cafe" data-zone="Maputo Central" data-open="false">
-                        <img src="../media/imagens/images%20(2).jpeg"
-                            alt="Fachada de um restaurante na Avenida Julius Nyerere" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-closed">Fechado</span><span>Maputo Central</span></div>
-                            <h3>Bistro Central</h3>
-                            <p>Café e refeições ligeiras no centro da cidade.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Café</dd></div>
-                                <div><dt>Ideal para</dt><dd>Encontros rápidos</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Ame Gourmet burger hamburguer fast-food"
-                        data-category="fast-food" data-zone="Matola" data-open="true">
-                        <img class="spot-image-contain" src="../media/imagens/images%20(6).jpeg"
-                            alt="Refeição de fast-food apresentada em Maputo" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
-                            <h3>Âme Gourmet</h3>
-                            <p>Hambúrgueres e opções rápidas.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Fast-food</dd></div>
-                                <div><dt>Ideal para</dt><dd>Refeição rápida</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Camarao do Sol mariscos restaurante praia"
-                        data-category="restaurante" data-zone="Costa do Sol" data-open="true">
-                        <img class="spot-image-contain" src="../media/imagens/images%20(4).jpeg"
-                            alt="Frango piri-piri grelhado" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Costa do Sol</span></div>
-                            <h3>Camarão do Sol</h3>
-                            <p>Mariscos e pratos para partilhar.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
-                                <div><dt>Ideal para</dt><dd>Grupos</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="West Takeaway burger refeicoes takeaway"
-                        data-category="takeaway" data-zone="Maputo Central" data-open="false">
-                        <img class="spot-image-contain" src="../media/imagens/images%20(3).jpeg"
-                            alt="Frango grelhado e batatas de um takeaway em Maputo" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-closed">Fechado</span><span>Maputo Central</span></div>
-                            <h3>West Takeaway</h3>
-                            <p>Hambúrgueres e refeições para levar.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Takeaway</dd></div>
-                                <div><dt>Ideal para</dt><dd>Refeição prática</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Sabores da Terra cozinha mocambicana restaurante"
-                        data-category="restaurante" data-zone="Matola" data-open="true">
-                        <img class="spot-image-contain" src="../media/imagens/images%20(5).jpeg"
-                            alt="Frango piri-piri servido para partilhar" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
-                            <h3>Sabores da Terra</h3>
-                            <p>Comida moçambicana e pratos do dia.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Restaurante</dd></div>
-                                <div><dt>Ideal para</dt><dd>Almoço</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="spot-card" data-name="Padaria Nova pao pastelaria cafe"
-                        data-category="cafe" data-zone="Matola" data-open="true">
-                        <img src="../media/imagens/images%20(7).jpeg"
-                            alt="Fachada de um restaurante em Maputo" loading="lazy" decoding="async">
-                        <div class="spot-card-body">
-                            <div class="spot-card-status"><span class="status-open">Aberto</span><span>Matola</span></div>
-                            <h3>Padaria Nova</h3>
-                            <p>Pão, pastelaria e café para começar o dia.</p>
-                            <dl class="spot-details">
-                                <div><dt>Tipo</dt><dd>Padaria e café</dd></div>
-                                <div><dt>Ideal para</dt><dd>Pequeno-almoço</dd></div>
-                            </dl>
-                        </div>
-                    </article>
+                <div class="weekly-stage" id="weekly-stage">
+                    <div id="weekly-slides" aria-live="off"><article class="weekly-slide" role="group" aria-roledescription="slide" aria-label="1 de 5"><div class="weekly-copy"><span class="weekly-tag">Destaque da semana</span><h3>Costa do Sol</h3><p>Uma mesa, bons sabores e tempo para descobrir o seu próximo spot.</p><p class="weekly-meta">Restaurante · Destaque demonstrativo</p><button class="btn btn-yellow" type="button" data-details="costa-sol">Ver estabelecimento <svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button></div><div class="weekly-image"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa do anúncio" width="760" height="640"><span class="weekly-counter">1 / 5</span></div></article><article class="weekly-slide" role="group" aria-roledescription="slide" aria-label="2 de 5" hidden><div class="weekly-copy"><span class="weekly-tag">Evento</span><h3>Sabores de Moçambique</h3><p>Um espaço para divulgar encontros gastronómicos, novidades e experiências na cidade.</p><p class="weekly-meta">Exemplo de evento · Maputo</p><a class="btn btn-yellow" href="#resultados">Explorar participantes <svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></a></div><div class="weekly-image"><img src="../media/imagens/chef.jpg" alt="Imagem ilustrativa do anúncio" width="760" height="640" loading="lazy"><span class="weekly-counter">2 / 5</span></div></article><article class="weekly-slide" role="group" aria-roledescription="slide" aria-label="3 de 5" hidden><div class="weekly-copy"><span class="weekly-tag">Anúncio</span><h3>O seu próximo café está aqui</h3><p>Descubra cafés e pastelarias para uma pausa, uma conversa ou um pequeno-almoço.</p><p class="weekly-meta">Exemplo de anúncio · Cafés e padarias</p><button class="btn btn-yellow" type="button" data-set-category="cafe">Explorar cafés <svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button></div><div class="weekly-image"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa do anúncio" width="760" height="640" loading="lazy"><span class="weekly-counter">3 / 5</span></div></article><article class="weekly-slide" role="group" aria-roledescription="slide" aria-label="4 de 5" hidden><div class="weekly-copy"><span class="weekly-tag">Destaque</span><h3>Zambi Restaurant</h3><p>Conheça os espaços em destaque e compare as informações antes de escolher.</p><p class="weekly-meta">Restaurante · Destaque demonstrativo</p><button class="btn btn-yellow" type="button" data-details="zambi">Ver estabelecimento <svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button></div><div class="weekly-image"><img src="../media/imagens/airport-waiting-room.jpg" alt="Imagem ilustrativa do anúncio" width="760" height="640" loading="lazy"><span class="weekly-counter">4 / 5</span></div></article><article class="weekly-slide" role="group" aria-roledescription="slide" aria-label="5 de 5" hidden><div class="weekly-copy"><span class="weekly-tag">Publicidade</span><h3>Anuncie no Kadiwa Spot</h3><p>Dê visibilidade ao seu restaurante, café ou takeaway. Conheça os formatos disponíveis para o seu negócio.</p><p class="weekly-meta">Para estabelecimentos · Consulte os planos</p><a class="btn btn-yellow" href="negocios.html#precos">Ver planos de anúncio <svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></a></div><div class="weekly-image"><img src="../media/imagens/outoddor.png" alt="Imagem ilustrativa do anúncio" width="760" height="640" loading="lazy"><span class="weekly-counter">5 / 5</span></div></article></div>
+                    <div class="weekly-arrows"><button class="icon-button" id="weekly-prev" type="button" aria-label="Anúncio anterior"><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-left"></use></svg></button><button class="icon-button" id="weekly-next" type="button" aria-label="Próximo anúncio"><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button></div>
+                    <div class="weekly-progress" aria-hidden="true"><span></span></div>
                 </div>
-
-                <div class="spots-empty" id="spots-empty" hidden>
-                    <h3>Nenhum spot encontrado</h3>
-                    <p>Tente outro nome, categoria ou zona.</p>
-                    <button class="btn btn-teal" type="button" id="empty-clear">Limpar filtros</button>
-                </div>
+                <div class="weekly-thumbnails" aria-label="Miniaturas dos anúncios"><button class="weekly-thumb" type="button" data-slide="0" aria-pressed="true" aria-label="Mostrar anúncio 1: Costa do Sol"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg><span><small>Destaque da semana</small><strong>Costa do Sol</strong></span></button><button class="weekly-thumb" type="button" data-slide="1" aria-pressed="false" aria-label="Mostrar anúncio 2: Sabores de Moçambique"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg><span><small>Evento</small><strong>Sabores de Moçambique</strong></span></button><button class="weekly-thumb" type="button" data-slide="2" aria-pressed="false" aria-label="Mostrar anúncio 3: O seu próximo café está aqui"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg><span><small>Anúncio</small><strong>O seu próximo café está aqui</strong></span></button><button class="weekly-thumb" type="button" data-slide="3" aria-pressed="false" aria-label="Mostrar anúncio 4: Zambi Restaurant"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg><span><small>Destaque</small><strong>Zambi Restaurant</strong></span></button><button class="weekly-thumb" type="button" data-slide="4" aria-pressed="false" aria-label="Mostrar anúncio 5: Anuncie no Kadiwa Spot"><svg class="ui-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg><span><small>Publicidade</small><strong>Anuncie no Kadiwa Spot</strong></span></button></div>
+                <p class="sr-only" id="weekly-announcement" aria-live="polite"></p>
             </div>
         </section>
-    </main>
 
+        <section class="explore-results" id="resultados" aria-labelledby="results-title">
+            <div class="container explore-layout">
+                <aside class="explore-sidebar" aria-label="Filtros de pesquisa"><div id="desktop-filter-host">
+                    <form class="filter-panel" id="filters-form">
+                        <div class="section-heading-row"><h2>Filtros</h2><button class="text-button" type="button" data-clear>Limpar tudo</button></div>
+                        <fieldset><legend>Categoria</legend><label class="check-option"><input type="checkbox" name="category" value="fast-food"><span>Fast-food</span></label><label class="check-option"><input type="checkbox" name="category" value="restaurante"><span>Restaurantes</span></label><label class="check-option"><input type="checkbox" name="category" value="cafe"><span>Cafés</span></label><label class="check-option"><input type="checkbox" name="category" value="padaria"><span>Padarias</span></label><label class="check-option"><input type="checkbox" name="category" value="pizza"><span>Pizza</span></label><label class="check-option"><input type="checkbox" name="category" value="delivery"><span>Delivery</span></label><label class="check-option"><input type="checkbox" name="category" value="takeaway"><span>Takeaway</span></label></fieldset>
+                        <fieldset><legend>Localização</legend><label class="sr-only" for="filter-location">Bairro ou zona</label><div class="input-with-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg><input id="filter-location" name="location" type="search" placeholder="Bairro ou zona..." list="explore-zones" autocomplete="off"></div></fieldset>
+                        <fieldset><legend>Preço</legend><div class="segment-options" aria-label="Faixa de preço"><button type="button" data-price="1" aria-pressed="false" aria-label="Faixa de preço 1">$</button><button type="button" data-price="2" aria-pressed="false" aria-label="Faixa de preço 2">$$</button><button type="button" data-price="3" aria-pressed="false" aria-label="Faixa de preço 3">$$$</button><button type="button" data-price="4" aria-pressed="false" aria-label="Faixa de preço 4">$$$$</button></div></fieldset>
+                        <fieldset><legend class="sr-only">Horário</legend><label class="switch-option" for="open-now"><span>Aberto agora</span><input id="open-now" name="open" type="checkbox" role="switch"></label></fieldset>
+                        <fieldset><legend>Avaliação mínima</legend><div class="segment-options"><button type="button" data-rating="3" aria-pressed="false" aria-label="Avaliação mínima 3">3 ★</button><button type="button" data-rating="3.5" aria-pressed="false" aria-label="Avaliação mínima 3.5">3,5 ★</button><button type="button" data-rating="4" aria-pressed="false" aria-label="Avaliação mínima 4">4 ★</button><button type="button" data-rating="4.5" aria-pressed="false" aria-label="Avaliação mínima 4.5">4,5 ★</button></div></fieldset>
+                        <p class="filter-note">Os filtros usam apenas os dados disponíveis nos exemplos.</p>
+                    </form>
+                </div></aside>
+                <div class="explore-list">
+                    <div class="explore-toolbar">
+                        <div><h2 id="results-title" class="sr-only">Resultados da pesquisa</h2><p id="results-count" role="status" aria-live="polite">21 estabelecimentos</p></div>
+                        <div class="results-actions"><button class="small-button mobile-filter-button" id="open-filters" type="button">Filtros</button><button class="small-button mobile-map-button" type="button" data-open-map>Mapa</button><label class="sr-only" for="spot-sort">Ordenar resultados</label><select id="spot-sort"><option value="relevance">Relevância</option><option value="distance">Mais próximo</option><option value="rating">Melhor avaliado</option><option value="price">Menor preço</option></select></div>
+                    </div>
+                    <div class="active-filters" id="active-filters" hidden><p id="active-summary"></p><button class="text-button" type="button" data-clear>Limpar filtros</button></div>
+                    <div class="spots-grid" id="spots-grid"><article class="spot-card" data-spot-id="polana-cafe">
+            <button class="spot-image-wrap" type="button" data-details="polana-cafe" aria-label="Ver detalhes de Polana Café"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="polana-cafe">Polana Café</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></div>
+                <p class="spot-subtitle">Cafés · Local + Delivery</p>
+                <p class="spot-description">0,3 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+            </div></article>
+<article class="spot-card" data-spot-id="maputo-grill">
+            <button class="spot-image-wrap" type="button" data-details="maputo-grill" aria-label="Ver detalhes de Maputo Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="maputo-grill">Maputo Grill</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,2 de 5">★ 4,2</span></div>
+                <p class="spot-subtitle">Restaurantes · Local</p>
+                <p class="spot-description">0,6 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 3">Faixa <strong>$$$</strong></span></p>
+            </div></article>
+<article class="spot-card" data-spot-id="nandos">
+            <button class="spot-image-wrap" type="button" data-details="nandos" aria-label="Ver detalhes de Nando’s Sommerschield"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de fast-food" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Fechado</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="nandos">Nando’s Sommerschield</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></div>
+                <p class="spot-subtitle">Fast-food · Delivery</p>
+                <p class="spot-description">0,8 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+            </div></article>
+<article class="spot-card" data-spot-id="pastelaria-central">
+            <button class="spot-image-wrap" type="button" data-details="pastelaria-central" aria-label="Ver detalhes de Pastelaria Central"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pastelaria-central">Pastelaria Central</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,7 de 5">★ 4,7</span></div>
+                <p class="spot-subtitle">Padarias · Local</p>
+                <p class="spot-description">1,1 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span></p>
+            </div></article>
+<article class="spot-card" data-spot-id="pizza-inn">
+            <button class="spot-image-wrap" type="button" data-details="pizza-inn" aria-label="Ver detalhes de Pizza Inn Baixa"><img src="../media/imagens/images%20(2).jpeg" alt="Imagem ilustrativa de pizza" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pizza-inn">Pizza Inn Baixa</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 3,9 de 5">★ 3,9</span></div>
+                <p class="spot-subtitle">Pizza · Local + Delivery</p>
+                <p class="spot-description">1,4 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+            </div></article>
+<article class="spot-card" data-spot-id="bom-dia">
+            <button class="spot-image-wrap" type="button" data-details="bom-dia" aria-label="Ver detalhes de Bom Dia Bakery"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="bom-dia">Bom Dia Bakery</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></div>
+                <p class="spot-subtitle">Padarias · Local</p>
+                <p class="spot-description">1,8 km</p>
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span></p>
+            </div></article></div>
+                    <div class="spots-empty" id="spots-empty" hidden><h3>Nenhum spot encontrado</h3><p>Tente outro nome, categoria ou zona.</p><button class="btn btn-teal" type="button" data-clear>Limpar filtros</button></div>
+                    <div class="load-more"><p id="results-shown"></p><button class="small-button" type="button" id="load-more">Ver mais resultados</button></div>
+                </div>
+                <aside class="explore-map-sidebar" aria-label="Mapa ilustrativo dos resultados"><div id="desktop-map-host">
+                    <div class="map-panel" id="map-panel"><div class="demo-map" id="demo-map" aria-label="Esquema ilustrativo dos estabelecimentos"><span class="map-area-label" aria-hidden="true">Mapa ilustrativo</span><div id="map-markers"></div></div><div class="map-panel-info"><p id="map-count">6 locais ilustrados</p><p>Posições esquemáticas, sem localização real.</p><button class="small-button" type="button" data-open-map><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg> Ver mapa completo</button></div><ol class="map-legend" id="map-legend" hidden></ol></div>
+                </div></aside>
+            </div>
+        </section>
+
+        <section class="explore-popular" aria-labelledby="popular-title">
+            <div class="container">
+                <div class="section-heading-row spot-section-heading">
+                    <div><h2 id="popular-title">Spots populares</h2><p>Uma selecção do catálogo demonstrativo</p></div>
+                    <div class="spot-row-actions">
+                        <button class="text-button" type="button" data-view-all>Ver todos</button>
+                        <div class="spot-row-controls" aria-label="Navegar nos spots populares">
+                            <button class="icon-button" type="button" data-scroll-row="popular-grid" data-direction="-1" aria-controls="popular-grid" aria-label="Spots populares anteriores" disabled><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-left"></use></svg></button>
+                            <button class="icon-button" type="button" data-scroll-row="popular-grid" data-direction="1" aria-controls="popular-grid" aria-label="Próximos spots populares"><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="spot-row" id="popular-grid" role="list" aria-labelledby="popular-title" tabindex="0"><article class="spot-card spot-card-compact" data-spot-id="costa-sol" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="costa-sol" aria-label="Ver detalhes de Costa do Sol"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Favorito da cidade</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="costa-sol">Costa do Sol</button></h3></div>
+                <p class="spot-subtitle">Restaurantes</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,8 de 5">★ 4,8</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="zambi" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="zambi" aria-label="Ver detalhes de Zambi Restaurant"><img src="../media/imagens/airport-waiting-room.jpg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Melhor avaliado</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="zambi">Zambi Restaurant</button></h3></div>
+                <p class="spot-subtitle">Restaurantes</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,6 de 5">★ 4,6</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="continental" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="continental" aria-label="Ver detalhes de Café Continental"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Mais visitado</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="continental">Café Continental</button></h3></div>
+                <p class="spot-subtitle">Cafés</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="pastelaria-central" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="pastelaria-central" aria-label="Ver detalhes de Pastelaria Central"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pastelaria-central">Pastelaria Central</button></h3></div>
+                <p class="spot-subtitle">Padarias · Local</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,7 de 5">★ 4,7</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="polana-cafe" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="polana-cafe" aria-label="Ver detalhes de Polana Café"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="polana-cafe">Polana Café</button></h3></div>
+                <p class="spot-subtitle">Cafés · Local + Delivery</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="pao-quente" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="pao-quente" aria-label="Ver detalhes de Casa do Pão Quente"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pao-quente">Casa do Pão Quente</button></h3></div>
+                <p class="spot-subtitle">Padarias</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,4 de 5">★ 4,4</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="bom-dia" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="bom-dia" aria-label="Ver detalhes de Bom Dia Bakery"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="bom-dia">Bom Dia Bakery</button></h3></div>
+                <p class="spot-subtitle">Padarias · Local</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="expresso-maputo" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="expresso-maputo" aria-label="Ver detalhes de Expresso Maputo"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="expresso-maputo">Expresso Maputo</button></h3></div>
+                <p class="spot-subtitle">Cafés</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></p>
+            </div></article></div>
+            </div>
+        </section>
+        <section class="explore-suggestions" aria-labelledby="suggestions-title">
+            <div class="container">
+                <div class="section-heading-row spot-section-heading">
+                    <div><h2 id="suggestions-title">Talvez goste</h2><p>Mais ideias para o seu próximo encontro</p></div>
+                    <div class="spot-row-actions">
+                        <button class="text-button" type="button" data-view-all>Ver todos</button>
+                        <div class="spot-row-controls" aria-label="Navegar nas sugestões">
+                            <button class="icon-button" type="button" data-scroll-row="suggestions-grid" data-direction="-1" aria-controls="suggestions-grid" aria-label="Sugestões anteriores" disabled><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-left"></use></svg></button>
+                            <button class="icon-button" type="button" data-scroll-row="suggestions-grid" data-direction="1" aria-controls="suggestions-grid" aria-label="Próximas sugestões"><svg class="ui-icon" aria-hidden="true"><use href="#icon-chevron-right"></use></svg></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="spot-row" id="suggestions-grid" role="list" aria-labelledby="suggestions-title" tabindex="0"><article class="spot-card spot-card-compact" data-spot-id="frango-baia" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="frango-baia" aria-label="Ver detalhes de Frango Grelhado Baía"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de fast-food" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="frango-baia">Frango Grelhado Baía</button></h3></div>
+                <p class="spot-subtitle">Fast-food</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,1 de 5">★ 4,1</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="pao-quente" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="pao-quente" aria-label="Ver detalhes de Casa do Pão Quente"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pao-quente">Casa do Pão Quente</button></h3></div>
+                <p class="spot-subtitle">Padarias</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,4 de 5">★ 4,4</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="expresso-maputo" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="expresso-maputo" aria-label="Ver detalhes de Expresso Maputo"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="expresso-maputo">Expresso Maputo</button></h3></div>
+                <p class="spot-subtitle">Cafés</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="xipamanine" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="xipamanine" aria-label="Ver detalhes de Xipamanine Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="xipamanine">Xipamanine Grill</button></h3></div>
+                <p class="spot-subtitle">Restaurantes</p>
+
+                <p class="spot-card-meta"><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="maputo-grill" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="maputo-grill" aria-label="Ver detalhes de Maputo Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="maputo-grill">Maputo Grill</button></h3></div>
+                <p class="spot-subtitle">Restaurantes · Local</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 3">Faixa <strong>$$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,2 de 5">★ 4,2</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="nandos" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="nandos" aria-label="Ver detalhes de Nando’s Sommerschield"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de fast-food" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Fechado</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="nandos">Nando’s Sommerschield</button></h3></div>
+                <p class="spot-subtitle">Fast-food · Delivery</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="pizza-inn" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="pizza-inn" aria-label="Ver detalhes de Pizza Inn Baixa"><img src="../media/imagens/images%20(2).jpeg" alt="Imagem ilustrativa de pizza" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pizza-inn">Pizza Inn Baixa</button></h3></div>
+                <p class="spot-subtitle">Pizza · Local + Delivery</p>
+
+                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 3,9 de 5">★ 3,9</span></p>
+            </div></article>
+<article class="spot-card spot-card-compact" data-spot-id="kadiwa-grill" role="listitem">
+            <button class="spot-image-wrap" type="button" data-details="kadiwa-grill" aria-label="Ver detalhes de Kadiwa Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
+            <div class="spot-card-body">
+                <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="kadiwa-grill">Kadiwa Grill</button></h3></div>
+                <p class="spot-subtitle">Restaurantes · Polana</p>
+
+
+            </div></article></div>
+            </div>
+        </section>
+        <section class="explore-business" aria-labelledby="business-title"><div class="container"><span class="business-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shopping-bag"></use></svg></span><h2 id="business-title">Tem um negócio de alimentação?</h2><p>Apresente o seu restaurante, café ou padaria a quem procura novos lugares para conhecer em Moçambique.</p><div class="button-row"><a class="btn btn-yellow" href="negocios.html">Registar estabelecimento</a><a class="btn btn-outline-white" href="negocios.html#precos">Conhecer soluções</a></div></div></section>
+    </main>
     <footer class="glovo-footer">
         <div class="container">
             <div class="footer-top-grid">
                 <div class="footer-brand-col">
                     <img class="footer-logo-img" src="../media/imagens/logo-dark.png" alt="Kadiwa Spot">
-                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em Moçambique.</p>
+                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
+                        Moçambique.</p>
                 </div>
+
                 <div class="footer-links-col">
                     <h4>Descobrir</h4>
                     <ul>
-                        <li><a href="explorar.html">Todos os spots</a></li>
                         <li><a href="explorar.html?categoria=restaurante">Restaurantes</a></li>
-                        <li><a href="explorar.html?categoria=cafe">Cafés</a></li>
+                        <li><a href="explorar.html?categoria=fast-food">Fast-food</a></li>
+                        <li><a href="explorar.html?categoria=cafe">Cafés & Padarias</a></li>
+                        <li><a href="../index.html#zonas">Cidades e Zonas</a></li>
+                        <li><a href="../index.html#faq">Como funciona</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-links-col">
-                    <h4>Kadiwa Spot</h4>
+                    <h4>Para Empresas</h4>
                     <ul>
-                        <li><a href="../index.html#como">Como funciona</a></li>
-                        <li><a href="sobre.html">Sobre o projecto</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="negocios.html">Registar Empresa</a></li>
+                        <li><a href="negocios.html#outdoors">Publicidade em Outdoors</a></li>
+                        <li><a href="negocios.html#precos">Planos e Preços</a></li>
+                        <li><a href="contacto.html?tipo=sugestao">Sugerir um espaço</a></li>
+                        <li><a href="contacto.html">Parcerias Corporativas</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-links-col">
-                    <h4>Para negócios</h4>
+                    <h4>Legal & Suporte</h4>
                     <ul>
-                        <li><a href="negocios.html">Registar espaço</a></li>
-                        <li><a href="negocios.html#precos">Planos e preços</a></li>
+                        <li><a href="sobre.html">Sobre o Projecto</a></li>
+                        <li><a href="sobre.html#termos">Termos e Condições</a></li>
+                        <li><a href="sobre.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="../index.html#faq">Centro de Ajuda / FAQ</a></li>
+                        <li><a href="contacto.html">Contacto Directo</a></li>
                     </ul>
                 </div>
             </div>
+
             <div class="footer-bottom-bar">
-                <div class="footer-copyright">&copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.</div>
+                <div class="footer-copyright">
+                    &copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.
+                </div>
+
+                <div class="footer-selectors">
+                    <select class="footer-select" aria-label="Selecionar idioma">
+                        <option value="pt" selected>Português (MZ)</option>
+                        <option value="en">English</option>
+                    </select>
+                    <select class="footer-select" aria-label="Selecionar moeda">
+                        <option value="mzn" selected>MZN (Metical)</option>
+                        <option value="usd">USD ($)</option>
+                    </select>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="../js/script.js"></script>
-    <script src="../js/explorar.js"></script>
-</body>
+    <nav class="explore-bottom-nav" aria-label="Navegação móvel"><a href="../index.html"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg><span>Início</span></a><a class="active" href="explorar.html" aria-current="page"><svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg><span>Explorar</span></a><button type="button" data-open-map><svg class="ui-icon" aria-hidden="true"><use href="#icon-pin"></use></svg><span>Mapa</span></button><a href="negocios.html"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shopping-bag"></use></svg><span>Para negócios</span></a></nav>
 
+    <dialog class="explore-dialog filter-dialog" id="filter-dialog" aria-labelledby="filter-dialog-title"><div class="dialog-heading"><h2 id="filter-dialog-title">Filtrar spots</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar filtros">×</button></div><div id="mobile-filter-host"></div><div class="dialog-actions"><button class="btn btn-teal" type="button" data-close-dialog>Ver resultados</button></div></dialog>
+    <dialog class="explore-dialog map-dialog" id="map-dialog" aria-labelledby="map-dialog-title"><div class="dialog-heading"><h2 id="map-dialog-title">Mapa dos resultados</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar mapa">×</button></div><div id="expanded-map-host"></div></dialog>
+    <dialog class="explore-dialog detail-dialog" id="detail-dialog" aria-labelledby="detail-dialog-title"><div class="dialog-heading"><h2 id="detail-dialog-title">Detalhes do spot</h2><button type="button" class="icon-button" data-close-dialog aria-label="Fechar detalhes">×</button></div><div id="detail-content"></div></dialog>
+
+    <script src="../js/script.js" defer></script>
+    <script src="../js/explorar-dados.js" defer></script>
+    <script src="../js/explorar.js" defer></script>
+</body>
 </html>

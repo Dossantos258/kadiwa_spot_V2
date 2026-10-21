@@ -11,110 +11,100 @@
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
 
-<body>
+<body class="content-page">
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
     <!-- Topbar (Glovo Yellow) -->
-    <header class="glovo-header">
+    <header class="glovo-header" id="top">
         <div class="container nav-wrap">
             <a class="brand-link" href="../index.html" aria-label="Kadiwa Spot Início">
                 <img class="header-logo" src="../media/imagens/logo.png" alt="Kadiwa Spot">
             </a>
 
-            <nav class="nav-links" aria-label="Menu principal">
+            <nav id="primary-navigation" class="nav-links" aria-label="Menu principal">
                 <a href="../index.html">Início</a>
-                <a href="negocios.html#outdoors">Outdoors & Mupis</a>
+                <a href="../index.html#publicidade">Publicidade</a>
+                <a href="explorar.html">Restaurantes & Takeaway</a>
+                <a href="../index.html#como">Como funciona</a>
                 <a href="negocios.html">Para negócios</a>
-                <a href="negocios.html#precos">Planos</a>
-                <a href="sobre.html">Sobre nós</a>
-                <a class="active" href="contacto.html">Contacto</a>
+                <a href="../index.html#faq">FAQ</a>
             </nav>
 
             <div class="header-actions">
-                <a class="btn btn-teal btn-sm" href="negocios.html#precos">Ver Planos</a>
+                <a class="btn btn-teal btn-sm" href="negocios.html">Registar / Começar</a>
+                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" aria-controls="primary-navigation" id="mobile-toggle" type="button">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
 
     <main id="conteudo">
-        <section class="business-hero-glovo" style="padding: 50px 0 60px 0;">
-            <div class="container" style="text-align: center; max-width: 780px;">
-                <span class="ad-tag tag-yellow" style="background: rgba(0,0,0,0.08); margin-bottom: 12px;">Estamos aqui
+        <section class="page-intro-section business-hero-glovo">
+            <div class="page-intro container">
+                <span class="page-eyebrow ad-tag tag-yellow">Estamos aqui
                     para ajudar</span>
-                <h1 style="font-size: 42px; font-weight: 900; margin-bottom: 14px;">Fale com a Equipa Kadiwa Spot</h1>
-                <p style="font-size: 17px; color: #333333;">Quer dar visibilidade ao seu negócio, cadastrar um espaço
+                <h1 class="page-title">Fale com a Equipa Kadiwa Spot</h1>
+                <p class="page-lead">Quer dar visibilidade ao seu negócio, cadastrar um espaço
                     ou sugerir um lugar? Envie-nos a sua mensagem.</p>
             </div>
         </section>
 
-        <section style="padding: 70px 0; background: #FFFFFF;">
-            <div class="container"
-                style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; max-width: 1000px;">
+        <section class="content-section">
+            <div class="contact-grid container">
                 <!-- Contact info -->
-                <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="contact-information">
                     <div>
-                        <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 12px;">Canais Directos</h2>
-                        <p style="color: var(--color-text-secondary); line-height: 1.6;">A nossa equipa responde
+                        <h2 class="content-title">Canais Directos</h2>
+                        <p class="body-copy">A nossa equipa responde
                             prontamente em horário laboral de segunda a sábado.</p>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div
-                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
-                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">📍 Escritórios
+                    <div class="form-stack">
+                        <div class="contact-info-card">
+                            <strong class="contact-info-title">📍 Escritórios
                                 Centrais</strong>
-                            <span style="color: var(--color-text-secondary); font-size: 14px;">Av. Julius Nyerere,
+                            <span class="contact-info-text">Av. Julius Nyerere,
                                 Polana Cimento, Maputo, Moçambique</span>
                         </div>
 
-                        <div
-                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
-                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">✉️ Email Comercial &
+                        <div class="contact-info-card">
+                            <strong class="contact-info-title">✉️ Email Comercial &
                                 Geral</strong>
-                            <a href="mailto:comercial@kadiwaspot.mz"
-                                style="color: var(--color-teal); font-weight: 600; font-size: 14px;">comercial@kadiwaspot.mz</a>
+                            <a href="mailto:comercial@kadiwaspot.mz" class="contact-info-link">comercial@kadiwaspot.mz</a>
                         </div>
 
-                        <div
-                            style="background: #FAFAFA; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
-                            <strong style="display: block; font-size: 15px; color: #1A1A1A;">📞 Atendimento &
+                        <div class="contact-info-card">
+                            <strong class="contact-info-title">📞 Atendimento &
                                 WhatsApp</strong>
-                            <a href="tel:+258840000000"
-                                style="color: var(--color-teal); font-weight: 600; font-size: 14px;">+258 84 000
+                            <a href="tel:+258840000000" class="contact-info-link">+258 84 000
                                 0000</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Form -->
-                <div
-                    style="background: #FFFFFF; padding: 36px; border-radius: var(--radius-xl); border: 1px solid var(--color-border);">
-                    <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 20px;">Envie uma Mensagem</h3>
-                    <form id="contact-form" style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="contact-form-card">
+                    <h3 class="form-title">Envie uma Mensagem</h3>
+                    <form id="contact-form" class="form-stack">
                         <div>
-                            <label for="contact-name"
-                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Nome
+                            <label for="contact-name" class="field-label">Nome
                                 Completo *</label>
-                            <input id="contact-name" type="text" class="newsletter-input"
-                                style="width: 100%; border-radius: var(--radius-md);" required
+                            <input id="contact-name" type="text" class="form-input newsletter-input" required
                                 placeholder="Ex.: Bento Machava">
                         </div>
 
                         <div>
-                            <label for="contact-email"
-                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Endereço
+                            <label for="contact-email" class="field-label">Endereço
                                 de E-mail *</label>
-                            <input id="contact-email" type="email" class="newsletter-input"
-                                style="width: 100%; border-radius: var(--radius-md);" required
+                            <input id="contact-email" type="email" class="form-input newsletter-input" required
                                 placeholder="nome@exemplo.com">
                         </div>
 
                         <div>
-                            <label for="contact-subject"
-                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Assunto
+                            <label for="contact-subject" class="field-label">Assunto
                                 do Contacto *</label>
-                            <select id="contact-subject" class="newsletter-input"
-                                style="width: 100%; border-radius: var(--radius-md);" required>
+                            <select id="contact-subject" class="form-input newsletter-input" required>
                                 <option value="">Selecione o assunto</option>
                                 <option value="outdoor">Publicidade em Outdoors & Mupis</option>
                                 <option value="carrossel">Destaque no Grande Carrossel</option>
@@ -125,19 +115,16 @@
                         </div>
 
                         <div>
-                            <label for="contact-message"
-                                style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Mensagem
+                            <label for="contact-message" class="field-label">Mensagem
                                 *</label>
-                            <textarea id="contact-message" rows="4" class="newsletter-input"
-                                style="width: 100%; border-radius: var(--radius-md);" required
+                            <textarea id="contact-message" rows="4" class="form-input newsletter-input" required
                                 placeholder="Descreva a sua mensagem ou dúvida..."></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-teal btn-lg" style="margin-top: 8px;">Enviar
+                        <button type="submit" class="form-submit btn btn-teal btn-lg">Enviar
                             Mensagem</button>
                     </form>
-                    <div id="form-feedback"
-                        style="display: none; margin-top: 16px; padding: 12px; border-radius: var(--radius-md); background: var(--color-teal-light); color: var(--color-teal); font-weight: 600; text-align: center;">
+                    <div id="form-feedback" class="form-feedback">
                         ✓ Mensagem enviada com sucesso! Entraremos em contacto brevemente.
                     </div>
                 </div>
@@ -154,32 +141,56 @@
                     <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
                         Moçambique.</p>
                 </div>
+
+                <div class="footer-links-col">
+                    <h4>Descobrir</h4>
+                    <ul>
+                        <li><a href="explorar.html?categoria=restaurante">Restaurantes</a></li>
+                        <li><a href="explorar.html?categoria=fast-food">Fast-food</a></li>
+                        <li><a href="explorar.html?categoria=cafe">Cafés & Padarias</a></li>
+                        <li><a href="../index.html#zonas">Cidades e Zonas</a></li>
+                        <li><a href="../index.html#faq">Como funciona</a></li>
+                    </ul>
+                </div>
+
                 <div class="footer-links-col">
                     <h4>Para Empresas</h4>
                     <ul>
                         <li><a href="negocios.html">Registar Empresa</a></li>
                         <li><a href="negocios.html#outdoors">Publicidade em Outdoors</a></li>
                         <li><a href="negocios.html#precos">Planos e Preços</a></li>
+                        <li><a href="contacto.html?tipo=sugestao">Sugerir um espaço</a></li>
+                        <li><a aria-current="page" href="contacto.html">Parcerias Corporativas</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-links-col">
-                    <h4>Navegação</h4>
+                    <h4>Legal & Suporte</h4>
                     <ul>
-                        <li><a href="../index.html">Início</a></li>
-                        <li><a href="../index.html#publicidade">Grande Carrossel</a></li>
-                        <li><a href="../index.html#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="sobre.html">Sobre nós</a></li>
-                        <li><a href="sobre.html#termos">Termos e Privacidade</a></li>
+                        <li><a href="sobre.html">Sobre o Projecto</a></li>
+                        <li><a href="sobre.html#termos">Termos e Condições</a></li>
+                        <li><a href="sobre.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="../index.html#faq">Centro de Ajuda / FAQ</a></li>
+                        <li><a aria-current="page" href="contacto.html">Contacto Directo</a></li>
                     </ul>
                 </div>
             </div>
+
             <div class="footer-bottom-bar">
-                <div class="footer-copyright">&copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.</div>
+                <div class="footer-copyright">
+                    &copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.
+                </div>
+
+                <div class="footer-selectors">
+                    <select class="footer-select" aria-label="Selecionar idioma">
+                        <option value="pt" selected>Português (MZ)</option>
+                        <option value="en">English</option>
+                    </select>
+                    <select class="footer-select" aria-label="Selecionar moeda">
+                        <option value="mzn" selected>MZN (Metical)</option>
+                        <option value="usd">USD ($)</option>
+                    </select>
+                </div>
             </div>
         </div>
     </footer>
@@ -191,6 +202,7 @@
             document.getElementById('form-feedback').style.display = 'block';
         });
     </script>
+    <script src="../js/script.js" defer></script>
 </body>
 
 </html>

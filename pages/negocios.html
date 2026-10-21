@@ -15,23 +15,26 @@
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
     <!-- Topbar (Glovo Yellow) -->
-    <header class="glovo-header">
+    <header class="glovo-header" id="top">
         <div class="container nav-wrap">
             <a class="brand-link" href="../index.html" aria-label="Kadiwa Spot Início">
                 <img class="header-logo" src="../media/imagens/logo.png" alt="Kadiwa Spot">
             </a>
 
-            <nav class="nav-links" aria-label="Menu principal">
+            <nav id="primary-navigation" class="nav-links" aria-label="Menu principal">
                 <a href="../index.html">Início</a>
-                <a href="#outdoors">Outdoors & Mupis</a>
-                <a class="active" href="negocios.html">Para negócios</a>
-                <a href="#precos">Planos & Preços</a>
+                <a href="../index.html#publicidade">Publicidade</a>
+                <a href="explorar.html">Restaurantes & Takeaway</a>
+                <a href="../index.html#como">Como funciona</a>
+                <a class="active" aria-current="page" href="negocios.html">Para negócios</a>
                 <a href="../index.html#faq">FAQ</a>
             </nav>
 
             <div class="header-actions">
-                <a class="btn btn-teal btn-sm" href="#precos">Ver Planos</a>
-                <a class="btn btn-white btn-sm" href="contacto.html">Falar com Equipa</a>
+                <a class="btn btn-teal btn-sm" href="negocios.html">Registar / Começar</a>
+                <button class="mobile-nav-toggle" aria-label="Abrir menu móvel" aria-expanded="false" aria-controls="primary-navigation" id="mobile-toggle" type="button">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
     </header>
@@ -41,8 +44,7 @@
         <section class="business-hero-glovo">
             <div class="container business-hero-grid">
                 <div class="business-hero-content">
-                    <span class="ad-tag tag-yellow"
-                        style="background: rgba(0,0,0,0.1); color: #1A1A1A; margin-bottom: 12px;">Soluções Comerciais &
+                    <span class="page-eyebrow ad-tag tag-yellow">Soluções Comerciais &
                         Mídia</span>
                     <h1>Dê mais visibilidade<br>ao seu negócio</h1>
                     <p class="lead">Apresente o seu restaurante, fast-food, takeaway ou marca a pessoas que procuram onde comer em
@@ -92,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div style="display: flex; gap: 12px; margin-top: 8px;">
+                        <div class="business-hero-actions">
                             <a class="btn btn-yellow" href="contacto.html?tipo=outdoor">Solicitar Cotação de Outdoor</a>
                             <a class="btn btn-outline-white" href="#precos">Ver Planos Combinados</a>
                         </div>
@@ -113,7 +115,7 @@
                                 alt="Mupi publicitário na Costa do Sol perto da ciclovia e praia">
                         </div>
                         <div class="media-card-body">
-                            <span class="ad-tag tag-teal" style="margin-bottom: 8px;">Zonas Balneares & Pedonais</span>
+                            <span class="card-eyebrow ad-tag tag-teal">Zonas Balneares & Pedonais</span>
                             <h4>Mupis Digitais na Costa do Sol</h4>
                             <p>Telas de alta resolução instaladas nos pontos de paragem e orla marítima mais
                                 frequentados de Maputo. Ideal para promoções sazonais, marisqueiras e takeaways.</p>
@@ -128,7 +130,7 @@
                                 alt="Ecrãs e tablets interativos em restaurante ou takeaway">
                         </div>
                         <div class="media-card-body">
-                            <span class="ad-tag tag-yellow" style="margin-bottom: 8px;">Ponto de Venda & Ementas</span>
+                            <span class="card-eyebrow ad-tag tag-yellow">Ponto de Venda & Ementas</span>
                             <h4>Telas e Ementas Digitais em Takeaways</h4>
                             <p>Apresente a sua ementa, horários e contactos no momento em que as pessoas escolhem onde
                                 comer. Ligue o seu espaço ao perfil Kadiwa e às suas redes sociais.</p>
@@ -175,7 +177,7 @@
                             <li class="missing">✕ Presença no Grande Carrossel da Home</li>
                             <li class="missing">✕ Descontos em Outdoors e Mupis</li>
                         </ul>
-                        <a class="btn btn-white" style="border: 1px solid var(--color-border);"
+                        <a class="btn btn-white"
                             href="contacto.html?plano=basico">Registar Gratuitamente</a>
                     </article>
 
@@ -187,7 +189,7 @@
                             <p class="plan-desc">Para negócios que querem crescer rápido</p>
                         </div>
                         <div class="plan-price-box">
-                            <strong data-month="1.500 MZN" data-year="1.200 MZN">1.500 MZN</strong>
+                            <strong><span class="plan-amount" data-month="1.500" data-year="1.200">1.500</span> <span>MZN</span></strong>
                             <span>/mês</span>
                         </div>
                         <ul class="plan-features-list">
@@ -210,7 +212,7 @@
                             <p class="plan-desc">Máxima visibilidade física e digital</p>
                         </div>
                         <div class="plan-price-box">
-                            <strong data-month="4.500 MZN" data-year="3.600 MZN">4.500 MZN</strong>
+                            <strong><span class="plan-amount" data-month="4.500" data-year="3.600">4.500</span> <span>MZN</span></strong>
                             <span>/mês</span>
                         </div>
                         <ul class="plan-features-list">
@@ -229,12 +231,12 @@
         </section>
 
         <!-- Final Contact CTA -->
-        <section class="section-newsletter" style="background: #FFFFFF;">
+        <section class="surface-white section-newsletter">
             <div class="container newsletter-box">
                 <h2>Precisa de um plano personalizado ou rede de Outdoors?</h2>
                 <p>A nossa equipa comercial cria campanhas sob medida para redes de restaurantes, franquias e grandes
                     marcas.</p>
-                <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
+                <div class="centered-actions button-row">
                     <a class="btn btn-teal btn-lg" href="contacto.html">Falar com a Equipa Comercial</a>
                     <a class="btn btn-white btn-lg" href="../index.html">Voltar à Página Inicial</a>
                 </div>
@@ -248,35 +250,40 @@
             <div class="footer-top-grid">
                 <div class="footer-brand-col">
                     <img class="footer-logo-img" src="../media/imagens/logo-dark.png" alt="Kadiwa Spot">
-                    <p>O guia gastronómico e espaço de visibilidade que conecta Moçambique a bons lugares e sabores.</p>
+                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
+                        Moçambique.</p>
                 </div>
 
                 <div class="footer-links-col">
-                    <h4>Para Negócios</h4>
+                    <h4>Descobrir</h4>
                     <ul>
-                        <li><a href="#outdoors">Outdoors de Grande Formato</a></li>
-                        <li><a href="#outdoors">Mupis e Totens Urbanos</a></li>
-                        <li><a href="#precos">Planos e Preços</a></li>
-                        <li><a href="contacto.html">Solicitar Visita Comercial</a></li>
+                        <li><a href="explorar.html?categoria=restaurante">Restaurantes</a></li>
+                        <li><a href="explorar.html?categoria=fast-food">Fast-food</a></li>
+                        <li><a href="explorar.html?categoria=cafe">Cafés & Padarias</a></li>
+                        <li><a href="../index.html#zonas">Cidades e Zonas</a></li>
+                        <li><a href="../index.html#faq">Como funciona</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-links-col">
-                    <h4>Navegação</h4>
+                    <h4>Para Empresas</h4>
                     <ul>
-                        <li><a href="../index.html">Página Inicial</a></li>
-                        <li><a href="../index.html#publicidade">Grande Carrossel</a></li>
-                        <li><a href="../index.html#destaques">Restaurantes Parceiros</a></li>
-                        <li><a href="../index.html#faq">Perguntas Frequentes</a></li>
+                        <li><a aria-current="page" href="negocios.html">Registar Empresa</a></li>
+                        <li><a href="negocios.html#outdoors">Publicidade em Outdoors</a></li>
+                        <li><a href="negocios.html#precos">Planos e Preços</a></li>
+                        <li><a href="contacto.html?tipo=sugestao">Sugerir um espaço</a></li>
+                        <li><a href="contacto.html">Parcerias Corporativas</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-links-col">
-                    <h4>Contactos</h4>
+                    <h4>Legal & Suporte</h4>
                     <ul>
-                        <li><span>Maputo & Matola, Moçambique</span></li>
-                        <li><a href="mailto:comercial@kadiwaspot.mz">comercial@kadiwaspot.mz</a></li>
-                        <li><a href="tel:+258840000000">+258 84 000 0000</a></li>
+                        <li><a href="sobre.html">Sobre o Projecto</a></li>
+                        <li><a href="sobre.html#termos">Termos e Condições</a></li>
+                        <li><a href="sobre.html#privacidade">Política de Privacidade</a></li>
+                        <li><a href="../index.html#faq">Centro de Ajuda / FAQ</a></li>
+                        <li><a href="contacto.html">Contacto Directo</a></li>
                     </ul>
                 </div>
             </div>
@@ -285,10 +292,15 @@
                 <div class="footer-copyright">
                     &copy; 2026 Kadiwa Spot, Lda. Todos os direitos reservados.
                 </div>
+
                 <div class="footer-selectors">
                     <select class="footer-select" aria-label="Selecionar idioma">
                         <option value="pt" selected>Português (MZ)</option>
                         <option value="en">English</option>
+                    </select>
+                    <select class="footer-select" aria-label="Selecionar moeda">
+                        <option value="mzn" selected>MZN (Metical)</option>
+                        <option value="usd">USD ($)</option>
                     </select>
                 </div>
             </div>
