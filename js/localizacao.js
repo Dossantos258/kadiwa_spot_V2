@@ -7,6 +7,9 @@ window.KadiwaLocation = (() => {
     let pending = null;
     const validCoordinates = point => Array.isArray(point) && point.length === 2
         && point.every(Number.isFinite) && Math.abs(point[0]) <= 90 && Math.abs(point[1]) <= 180;
+    function clear() {
+        try { sessionStorage.removeItem(cacheKey); } catch { /* Sem armazenamento. */ }
+    }
     function cached() {
         try {
             const value = JSON.parse(sessionStorage.getItem(cacheKey));
@@ -36,9 +39,12 @@ window.KadiwaLocation = (() => {
                 const value = { coordinates, accuracy: Number.isFinite(position.coords.accuracy) ? position.coords.accuracy : null, timestamp: Date.now() };
                 try { sessionStorage.setItem(cacheKey, JSON.stringify(value)); } catch { /* Sem persistência. */ }
                 resolve(value);
-            }, reject, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+            }, error => {
+                if (error.code === 1) clear();
+                reject(error);
+            }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
         }).finally(() => { pending = null; });
         return pending;
     }
-    return { cached, request, errorMessage, validCoordinates };
+    return { cached, request, errorMessage, validCoordinates, clear };
 })();

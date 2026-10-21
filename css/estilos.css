@@ -108,6 +108,10 @@ button {
     background: none;
 }
 
+.location-feedback { font-size: 12px; line-height: 1.6; color: var(--color-text-secondary); }
+.location-feedback:empty { display: none; }
+button[aria-busy="true"] { cursor: progress; }
+
 .skip-link {
     position: fixed;
     top: -100px;

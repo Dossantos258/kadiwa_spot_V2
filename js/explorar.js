@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const photo = item => `../media/imagens/${encodeURIComponent(item.photo || item.image)}`;
     const number = value => new Intl.NumberFormat('pt-MZ', { maximumFractionDigits: 1 }).format(value);
     const findSpot = id => data.spots.find(item => item.id === id);
-    const state = { query: '', location: '', categories: new Set(), open: false, price: null, rating: null, sort: 'relevance', limit: 6 };
+    const locationAPI = window.KadiwaLocation;
+    let userLocation = locationAPI.cached();
+    const state = { query: '', location: '', categories: new Set(), open: false, price: null, rating: null, sort: 'relevance', limit: 6, origin: userLocation?.coordinates || null };
+    let locating = false;
     const filterDialog = $('#filter-dialog');
     const mapDialog = $('#map-dialog');
     const detailsDialog = $('#detail-dialog');
@@ -21,6 +24,54 @@ document.addEventListener('DOMContentLoaded', () => {
     let mediaIndex = 0;
     const asset = file => `../media/imagens/${encodeURIComponent(file)}`;
     let filtered = [];
+    const distanceLabel = item => {
+        const km = data.distanceKm(state.origin, item.coordinates);
+        return km == null ? '' : `${km < 1 ? `${Math.round(km * 1000)} m` : `${number(km)} km`} em linha reta`;
+    };
+    function locationStatus(message) {
+        for (const selector of ['#geolocation-status', '#detail-geolocation-status']) {
+            const status = $(selector);
+            if (status) status.textContent = message;
+        }
+    }
+    async function useUserLocation() {
+        if (locating) return;
+        locating = true;
+        const controls = $$('[data-quick="nearby"], [data-use-user-location]');
+        controls.forEach(button => { button.disabled = true; button.setAttribute('aria-busy', 'true'); });
+        locationStatus('A pedir a sua localização ao navegador…');
+        try {
+            userLocation = await locationAPI.request();
+            state.origin = userLocation.coordinates;
+            state.sort = 'distance';
+            render();
+            if (detailMap && activeSpot) {
+                detailMap.setUserPosition(userLocation);
+                $('[data-detail-distance]').textContent = distanceLabel(activeSpot) || 'Localização do spot por confirmar';
+                const links = data.mapLinks(activeSpot, state.origin);
+                $('.detail-location-actions > a.btn').href = links.directions || links.search;
+            }
+            locationStatus(`Localização obtida. Distâncias em linha reta${Number.isFinite(userLocation.accuracy) ? `; precisão aproximada de ${Math.round(userLocation.accuracy)} m` : ''}.`);
+        } catch (error) {
+            if (error.code === 1) {
+                userLocation = null;
+                state.origin = null;
+                state.sort = 'relevance';
+                render();
+                if (detailMap && activeSpot) {
+                    detailMap.setUserPosition(null);
+                    $('[data-detail-distance]').textContent = 'Ative a sua localização';
+                    const links = data.mapLinks(activeSpot);
+                    $('.detail-location-actions > a.btn').href = links.directions || links.search;
+                }
+            }
+            locationStatus(locationAPI.errorMessage(error));
+            syncControls();
+        } finally {
+            locating = false;
+            controls.forEach(button => { button.disabled = false; button.removeAttribute('aria-busy'); });
+        }
+    }
 
     // Manter a pesquisa visível e os resultados abaixo das duas faixas fixas.
     const searchBar = $('.explore-search-bar');
@@ -46,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const badge = badgeText ? `<span class="spot-tag">${escape(badgeText)}</span>` : '';
         const rating = item.rating == null ? '' : `<span class="spot-rating" aria-label="Avaliação demonstrativa ${number(item.rating)} de 5">★ ${number(item.rating)}${!compact && item.reviews != null ? ` <span>(${item.reviews})</span>` : ''}</span>`;
         const subtitle = [category, item.zone || item.mode].filter(Boolean).join(' · ');
-        const extra = [item.distance == null ? '' : `${number(item.distance)} km`, item.description].filter(Boolean).join(' · ');
-        const price = item.price == null ? '' : `<span class="spot-price" aria-label="Faixa de preço ${item.price}">Faixa <strong>${'$'.repeat(item.price)}</strong></span>`;
+        const extra = [distanceLabel(item), item.description].filter(Boolean).join(' · ');
+        const price = `<span class="spot-price"><strong>${escape(data.priceLabel(item))}</strong>${item.priceIsDemo ? '<small>Preço demonstrativo</small>' : ''}</span>`;
         const imageClass = !item.photo && item.imageFit === 'contain' ? 'image-contain' : '';
         return `<article class="spot-card${compact ? ' spot-card-compact' : ''}" data-spot-id="${item.id}"${compact ? ' role="listitem"' : ''}>
             <button class="spot-image-wrap" type="button" data-details="${item.id}" aria-label="Ver detalhes de ${escape(item.name)}"><img src="${photo(item)}" alt="Imagem ilustrativa de ${escape(category.toLowerCase())}" class="${imageClass}" width="600" height="450" loading="lazy" decoding="async">${badge}</button>
@@ -63,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const located = items.filter(item => item.coordinates);
         if (!mainMap) mainMap = window.KadiwaMaps.create($('#results-map'), { items, onSelect: item => openDetails(item.id), status: $('#results-map-status') });
         else mainMap.setItems(items);
+        mainMap.setUserPosition(userLocation);
         $('#map-count').textContent = `${located.length} de ${items.length} locais com ponto no mapa`;
         $('#map-note').textContent = located.some(item => item.locationType === 'demo')
             ? 'Pontos de demonstração na Matola. Os restantes endereços estão por confirmar.'
@@ -86,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $$('[data-price]').forEach(button => button.setAttribute('aria-pressed', String(state.price === Number(button.dataset.price))));
         $$('[data-rating]').forEach(button => button.setAttribute('aria-pressed', String(state.rating === Number(button.dataset.rating))));
         $$('[data-quick]').forEach(button => {
-            const active = { open: state.open, nearby: state.sort === 'distance', top: state.sort === 'rating' }[button.dataset.quick];
+            const active = { open: state.open, nearby: Boolean(state.origin) && state.sort === 'distance', top: state.sort === 'rating' }[button.dataset.quick];
             button.setAttribute('aria-pressed', String(active));
         });
     }
@@ -105,9 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (state.location) summary.push(`Zona: ${state.location}`);
         if (state.categories.size) summary.push(Array.from(state.categories, data.categoryLabel).join(', '));
         if (state.open) summary.push('Aberto agora');
-        if (state.price != null) summary.push(`Preço: ${'$'.repeat(state.price)}`);
+        if (state.price != null) summary.push(`Preço mínimo: ${data.priceRanges.find(range => range.id === state.price).label}`);
         if (state.rating != null) summary.push(`Avaliação: ${number(state.rating)}+`);
-        if (state.sort === 'distance') summary.push('Distâncias demonstrativas');
+        if (state.sort === 'distance' && state.origin) summary.push('Distância da sua localização, em linha reta');
         $('#active-summary').textContent = summary.join(' · ');
         $('#active-filters').hidden = !summary.length;
         syncControls();
@@ -131,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         detailMap?.destroy();
         detailMap = null;
         activeSpot = item;
-        const links = data.mapLinks(item);
+        const links = data.mapLinks(item, state.origin);
         const locationNote = item.locationType === 'demo' ? 'Ponto demonstrativo na Matola, escolhido para este protótipo. Não é um endereço comercial confirmado.'
             : item.address ? 'Endereço transcrito do material fornecido. Confirme com o estabelecimento.'
                 : 'Endereço exacto por confirmar. O mapa mostra apenas a região de referência, sem marcador.';
@@ -139,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Categoria', data.categoryLabel(item.category)], ['Zona', item.zone],
             ['Horário', item.open == null ? null : item.open ? 'Aberto (exemplo)' : 'Fechado (exemplo)'],
             ['Avaliação', item.rating == null ? null : `${number(item.rating)} / 5 (exemplo)`],
-            ['Distância', item.distance == null ? null : `${number(item.distance)} km (exemplo)`],
-            ['Preço', item.price == null ? null : '$'.repeat(item.price)], ['Modalidade', item.mode],
+            ['Distância', distanceLabel(item) || (state.origin ? 'Localização do spot por confirmar' : 'Ative a sua localização')],
+            ['Preço', `${data.priceLabel(item)}${item.priceIsDemo ? ' (demonstrativo)' : ''}`], ['Modalidade', item.mode],
             ['Endereço', item.address], ['Contacto', item.phone]
         ];
         $('#detail-dialog-title').textContent = item.name;
@@ -150,17 +202,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="detail-body"><p class="detail-category">${escape(data.categoryLabel(item.category))}${item.zone ? ` · ${escape(item.zone)}` : ''}</p><h2 id="detail-title" tabindex="-1">${escape(item.name)}</h2>
                     <div class="detail-summary"><span>${item.rating == null ? 'Sem avaliação' : `★ ${number(item.rating)} / 5 · avaliação demonstrativa`}</span>${item.reviews ? `<span>${item.reviews} avaliações de exemplo</span>` : ''}</div>
                     <div class="detail-tabs" role="tablist" aria-label="Explorar este spot">${[['info', 'Sobre o local'], ['menus', 'Ver menus'], ['photos', 'Imagens'], ['ratings', 'Avaliações']].map(([key, label], index) => `<button id="tab-${key}" type="button" role="tab" data-detail-tab="${key}" aria-controls="panel-${key}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">${label}</button>`).join('')}</div>
-                    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" tabindex="0"><h3>Sobre o local</h3><p>${escape(item.description || 'Informações adicionais sobre este estabelecimento ainda não disponíveis.')}</p><dl class="detail-facts">${facts.map(([title, value]) => `<div><dt>${title}</dt><dd>${escape(value ?? 'Não informado')}</dd></div>`).join('')}</dl>${item.phone ? `<a class="text-button detail-contact" href="tel:${escape(item.phone)}">Ligar para o estabelecimento</a>` : ''}</section>
+                    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" tabindex="0"><h3>Sobre o local</h3><p>${escape(item.description || 'Informações adicionais sobre este estabelecimento ainda não disponíveis.')}</p><dl class="detail-facts">${facts.map(([title, value]) => `<div><dt>${title}</dt><dd${title === 'Distância' ? ' data-detail-distance' : ''}>${escape(value ?? 'Não informado')}</dd></div>`).join('')}</dl>${item.phone ? `<a class="text-button detail-contact" href="tel:${escape(item.phone)}">Ligar para o estabelecimento</a>` : ''}</section>
                     <section id="panel-menus" role="tabpanel" aria-labelledby="tab-menus" tabindex="0" hidden><h3>Menus em imagens</h3><p class="detail-disclaimer">Exemplos visuais fornecidos para o protótipo. Os pratos, preços e contactos nestas imagens não foram confirmados para este spot.</p><div class="detail-menu-grid">${item.menus.map((menu, index) => `<button class="detail-menu-card" type="button" data-menu-index="${index}"><img src="${asset(menu.file)}" alt="${escape(menu.title)}" loading="lazy" width="350" height="450"><span>${escape(menu.title)}</span><small>Ampliar menu</small></button>`).join('')}</div></section>
                     <section id="panel-photos" role="tabpanel" aria-labelledby="tab-photos" tabindex="0" hidden><h3>Imagens do spot</h3><p>Imagens de apresentação fornecidas para o catálogo.</p><div class="detail-gallery">${item.gallery.map((image, index) => `<button type="button" data-photo-index="${index}" aria-label="Ampliar ${escape(image.title)}"><img src="${asset(image.file)}" alt="${escape(image.title)} de ${escape(item.name)}" loading="lazy" width="500" height="350"></button>`).join('')}</div></section>
                     <section id="panel-ratings" role="tabpanel" aria-labelledby="tab-ratings" tabindex="0" hidden><h3>Avaliações</h3>${item.rating == null ? '<p>Este spot ainda não tem avaliações disponíveis.</p>' : `<p class="detail-rating-value">★ ${number(item.rating)} <span>/ 5</span></p><p>${item.reviews ? `${item.reviews} avaliações demonstrativas.` : 'Classificação demonstrativa do catálogo.'}</p>`}<p>Não há comentários de visitantes publicados neste protótipo.</p></section>
                     <p class="prototype-note">Catálogo de demonstração. Fotografias, menus, horários e avaliações não constituem informação comercial verificada.</p>
                 </div>
             </div>
-            <aside class="spot-detail-location" aria-label="Localização de ${escape(item.name)}"><h3>Localização</h3><p>${escape(item.address || item.zone || 'Endereço por confirmar')}</p><div class="real-map detail-real-map" id="detail-map" aria-label="Mapa de referência de ${escape(item.name)}"></div><p class="map-load-status" id="detail-map-status" role="status"></p><p class="detail-location-note">${locationNote}</p><div class="detail-location-actions"><a class="btn btn-teal" href="${escape(links.directions || links.search)}" target="_blank" rel="noopener noreferrer">${links.directions ? 'Ver direções' : 'Pesquisar localização'}</a><button class="small-button" type="button" data-copy-location>${links.hasLocation ? 'Copiar localização' : 'Copiar pesquisa no mapa'}</button><a class="text-button" href="${escape(links.search)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div><p class="copy-location-status" id="copy-location-status" role="status" aria-live="polite"></p><div id="copy-location-fallback" hidden><label for="location-text">Selecione e copie a localização:</label><textarea id="location-text" readonly></textarea></div></aside>
+            <aside class="spot-detail-location" aria-label="Localização de ${escape(item.name)}"><h3>Localização</h3><p>${escape(item.address || item.zone || 'Endereço por confirmar')}</p><div class="real-map detail-real-map" id="detail-map" aria-label="Mapa de referência de ${escape(item.name)}"></div><p class="map-load-status" id="detail-map-status" role="status"></p><p class="detail-location-note">${locationNote}</p><div class="detail-location-actions"><a class="btn btn-teal" href="${escape(links.directions || links.search)}" target="_blank" rel="noopener noreferrer">${links.directions ? 'Ver direções' : 'Pesquisar localização'}</a><button class="small-button" type="button" data-use-user-location>Usar a minha localização</button><button class="small-button" type="button" data-copy-location>${links.hasLocation ? 'Copiar localização' : 'Copiar pesquisa no mapa'}</button><a class="text-button" href="${escape(links.search)}" target="_blank" rel="noopener noreferrer">Abrir no Google Maps</a></div><p class="location-feedback" id="detail-geolocation-status" role="status" aria-live="polite"></p><p class="copy-location-status" id="copy-location-status" role="status" aria-live="polite"></p><div id="copy-location-fallback" hidden><label for="location-text">Selecione e copie a localização:</label><textarea id="location-text" readonly></textarea></div></aside>
         </div>`;
         showDialog(detailsDialog);
         detailMap = window.KadiwaMaps.create($('#detail-map'), { items: [item], status: $('#detail-map-status') });
+        detailMap.setUserPosition(userLocation);
         requestAnimationFrame(() => detailMap?.resize());
         $('#detail-title').focus();
     }
@@ -248,7 +301,11 @@ document.addEventListener('DOMContentLoaded', () => {
         $(id).addEventListener('input', event => { state.location = event.target.value; render(); });
     }
     $('#open-now').addEventListener('change', event => { state.open = event.target.checked; render(); });
-    $('#spot-sort').addEventListener('change', event => { state.sort = event.target.value; render(); });
+    $('#spot-sort').addEventListener('change', event => {
+        if (event.target.value === 'distance' && !state.origin) { useUserLocation(); return; }
+        state.sort = event.target.value;
+        render();
+    });
     $$('[name="category"]').forEach(input => input.addEventListener('change', () => {
         input.checked ? state.categories.add(input.value) : state.categories.delete(input.value);
         render();
@@ -272,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
     $$('[data-quick]').forEach(button => button.addEventListener('click', () => {
         const type = button.dataset.quick;
+        if (type === 'nearby') { useUserLocation(); return; }
         if (type === 'open') state.open = !state.open;
         else {
             const sort = type === 'nearby' ? 'distance' : 'rating';
@@ -295,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', event => {
         const button = event.target.closest('[data-details]');
         if (button) openDetails(button.dataset.details);
+        if (event.target.closest('[data-use-user-location]')) useUserLocation();
     });
     $$('[data-set-category]').forEach(button => button.addEventListener('click', () => {
         reset();
@@ -358,6 +417,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.categories.some(item => item.id === normalized)) state.categories.add(normalized);
     });
     render();
+    if (params.get('perto') === '1') {
+        if (state.origin) {
+            state.sort = 'distance';
+            render();
+            locationStatus('A usar a localização obtida nesta sessão. Distâncias em linha reta.');
+        } else useUserLocation();
+    }
 
     // Carrossel independente do carrossel já existente na página inicial.
     const slides = $$('.weekly-slide');

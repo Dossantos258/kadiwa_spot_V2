@@ -6,7 +6,7 @@ window.KadiwaMaps = (() => {
     function create(host, { items = [], onSelect, status } = {}) {
         if (!window.L) {
             host.innerHTML = '<p class="map-unavailable">Mapa indisponível. Use o botão de direções para abrir a localização.</p>';
-            return { setItems() {}, resize() {}, destroy() {} };
+            return { setItems() {}, setUserPosition() {}, resize() {}, destroy() {} };
         }
         const map = L.map(host, { scrollWheelZoom: false, attributionControl: true }).setView(cityCenter, 11);
         const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -14,6 +14,18 @@ window.KadiwaMaps = (() => {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>'
         }).addTo(map);
         const markers = L.layerGroup().addTo(map);
+        const userMarkers = L.layerGroup().addTo(map);
+        let userPosition = null;
+        let currentItems = [];
+        const validPoint = point => Array.isArray(point) && point.length === 2 && point.every(Number.isFinite)
+            && Math.abs(point[0]) <= 90 && Math.abs(point[1]) <= 180;
+        function fitLocations() {
+            const points = currentItems.filter(item => validPoint(item.coordinates)).map(item => item.coordinates);
+            if (userPosition) points.push(userPosition.coordinates);
+            if (points.length === 1) map.setView(points[0], 16);
+            else if (points.length > 1) map.fitBounds(points, { padding: [32, 32], maxZoom: 15 });
+            else map.setView(cityCenter, 11);
+        }
         let failures = 0;
         tiles.on('tileerror', () => {
             failures++;
@@ -24,8 +36,9 @@ window.KadiwaMaps = (() => {
             if (status) status.textContent = '';
         });
         function setItems(next) {
+            currentItems = next;
             markers.clearLayers();
-            const located = next.filter(item => Array.isArray(item.coordinates) && item.coordinates.length === 2 && item.coordinates.every(Number.isFinite));
+            const located = next.filter(item => validPoint(item.coordinates));
             located.forEach((item, index) => {
                 const label = `${item.name}${item.locationType === 'demo' ? ' — ponto demonstrativo' : ''}`;
                 const marker = L.marker(item.coordinates, {
@@ -37,12 +50,22 @@ window.KadiwaMaps = (() => {
                 marker.bindTooltip(tooltip);
                 if (onSelect) marker.on('click', () => onSelect(item));
             });
-            if (located.length === 1) map.setView(located[0].coordinates, 16);
-            else if (located.length > 1) map.fitBounds(located.map(item => item.coordinates), { padding: [32, 32], maxZoom: 15 });
-            else map.setView(cityCenter, 11);
+            fitLocations();
+        }
+        function setUserPosition(position) {
+            if (position === userPosition) return;
+            userMarkers.clearLayers();
+            userPosition = validPoint(position?.coordinates) ? position : null;
+            if (userPosition) {
+                const label = document.createElement('span');
+                label.textContent = 'A sua localização';
+                L.circleMarker(userPosition.coordinates, { radius: 8, color: '#fff', weight: 3, fillColor: '#181a1b', fillOpacity: 1 })
+                    .addTo(userMarkers).bindTooltip(label, { permanent: true, direction: 'top' });
+            }
+            fitLocations();
         }
         setItems(items);
-        return { setItems, resize: () => map.invalidateSize({ pan: false }), destroy: () => map.remove() };
+        return { setItems, setUserPosition, resize: () => map.invalidateSize({ pan: false }), destroy: () => map.remove() };
     }
     return { create };
 })();

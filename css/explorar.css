@@ -92,6 +92,8 @@
 .segment-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
 .segment-options button { min-height: 32px; border: 1px solid #d7dcdf; border-radius: 6px; font-size: 10px; padding: 2px; }
 .segment-options button[aria-pressed="true"] { background: var(--color-teal-hover); border-color: var(--color-teal-hover); color: #fff; }
+.price-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.price-options button { padding: 6px 4px; min-height: 40px; line-height: 1.4; }
 .switch-option { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
 .switch-option input { appearance: none; position: relative; width: 36px; height: 20px; border: 1px solid #afb8bf; border-radius: 99px; background: #c9d0d3; cursor: pointer; }
 .switch-option input::before { content: ''; position: absolute; left: 2px; top: 2px; height: 14px; width: 14px; border: 1px solid #a5afb5; border-radius: 99px; background: #fff; transition: transform .15s ease; }
@@ -130,6 +132,7 @@
 .spot-card-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-top: 4px; font-size: 12px; line-height: 1.5; color: var(--color-text-muted); }
 .spot-card-meta > * + *::before { content: '·'; margin-right: 6px; color: var(--color-text-muted); }
 .spot-price strong { color: var(--color-dark); font-weight: 600; }
+.spot-price small { display: block; font-size: 10px; color: var(--color-text-muted); font-weight: 400; }
 .load-more { text-align: center; margin-top: 22px; }
 .load-more p { color: var(--color-text-muted); font-size: 11px; margin-bottom: 10px; }
 .load-more .small-button { padding-inline: 22px; min-height: 40px; }

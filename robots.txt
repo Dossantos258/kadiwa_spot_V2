@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /fastFood-master/
+Allow: /fastFood-master/public/
+Disallow: /tests/
+Disallow: /scripts/
+Disallow: /docs/
+
+Sitemap: https://kadiwaspot.merciodossantos.me/sitemap.xml

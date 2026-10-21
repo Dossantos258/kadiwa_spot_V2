@@ -3,12 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Descubra restaurantes, cafés, padarias e takeaways no Kadiwa Spot. Explore o protótipo de pesquisa e descoberta.">
     <meta name="theme-color" content="#FFC244">
-    <title>Explorar spots | Kadiwa Spot</title>
     <link rel="stylesheet" href="../css/vendor/leaflet/leaflet.css">
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/explorar.css">
+    <!-- KADIWA:SEO:START -->
+    <title>Restaurantes em Maputo e Matola | Kadiwa Spot</title>
+    <meta name="description" content="Explore restaurantes, cafés, padarias e fast-foods no Kadiwa Spot. Consulte mapas e direções, menus de exemplo e preços demonstrativos em MZN.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:site_name" content="Kadiwa Spot">
+    <meta property="og:locale" content="pt_MZ">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Restaurantes em Maputo e Matola | Kadiwa Spot">
+    <meta property="og:description" content="Explore restaurantes, cafés, padarias e fast-foods no Kadiwa Spot. Consulte mapas e direções, menus de exemplo e preços demonstrativos em MZN.">
+    <meta property="og:image" content="https://kadiwaspot.merciodossantos.me/media/imagens/logo.png">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="Logótipo Kadiwa Spot">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Restaurantes em Maputo e Matola | Kadiwa Spot">
+    <meta name="twitter:description" content="Explore restaurantes, cafés, padarias e fast-foods no Kadiwa Spot. Consulte mapas e direções, menus de exemplo e preços demonstrativos em MZN.">
+    <meta name="twitter:image" content="https://kadiwaspot.merciodossantos.me/media/imagens/logo.png">
+    <meta name="twitter:image:alt" content="Logótipo Kadiwa Spot">
+    <link rel="icon" type="image/png" sizes="48x48" href="../media/imagens/favicon.png">
+    <link rel="canonical" href="https://kadiwaspot.merciodossantos.me/pages/explorar.html">
+    <meta property="og:url" content="https://kadiwaspot.merciodossantos.me/pages/explorar.html">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://kadiwaspot.merciodossantos.me/pages/explorar.html#webpage",
+      "url": "https://kadiwaspot.merciodossantos.me/pages/explorar.html",
+      "name": "Restaurantes em Maputo e Matola | Kadiwa Spot",
+      "description": "Explore restaurantes, cafés, padarias e fast-foods no Kadiwa Spot. Consulte mapas e direções, menus de exemplo e preços demonstrativos em MZN.",
+      "inLanguage": "pt-MZ",
+      "isPartOf": {
+        "@id": "https://kadiwaspot.merciodossantos.me/#website"
+      },
+      "about": {
+        "@id": "https://kadiwaspot.merciodossantos.me/#organization"
+      },
+      "publisher": {
+        "@id": "https://kadiwaspot.merciodossantos.me/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://kadiwaspot.merciodossantos.me/pages/explorar.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://kadiwaspot.merciodossantos.me/pages/explorar.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kadiwa Spot",
+          "item": "https://kadiwaspot.merciodossantos.me/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Explorar restaurantes",
+          "item": "https://kadiwaspot.merciodossantos.me/pages/explorar.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <!-- KADIWA:SEO:END -->
 </head>
 <body class="explore-page">
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
@@ -99,7 +164,8 @@
                     <button type="button" class="filter-pill" data-quick="open" aria-pressed="false">Aberto agora</button>
                     <button type="button" class="filter-pill" data-quick="top" aria-pressed="false">Melhor avaliados</button>
                 </div>
-                <p class="prototype-note">Protótipo · Informações, distâncias e imagens demonstrativas.</p>
+                <p class="prototype-note">Protótipo · Preços, informações e imagens demonstrativos.</p>
+                <p class="location-feedback" id="geolocation-status" role="status" aria-live="polite"></p>
                 <noscript><p class="prototype-note">Ative o JavaScript para pesquisar, filtrar e consultar os detalhes.</p></noscript>
             </div>
         </div>
@@ -148,48 +214,42 @@
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="polana-cafe">Polana Café</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></div>
                 <p class="spot-subtitle">Cafés · Local + Delivery</p>
-                <p class="spot-description">0,3 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>150–450 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article>
 <article class="spot-card" data-spot-id="maputo-grill">
             <button class="spot-image-wrap" type="button" data-details="maputo-grill" aria-label="Ver detalhes de Maputo Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="maputo-grill">Maputo Grill</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,2 de 5">★ 4,2</span></div>
                 <p class="spot-subtitle">Restaurantes · Local</p>
-                <p class="spot-description">0,6 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 3">Faixa <strong>$$$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>500–1500 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article>
 <article class="spot-card" data-spot-id="nandos">
             <button class="spot-image-wrap" type="button" data-details="nandos" aria-label="Ver detalhes de Nando’s Sommerschield"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de fast-food" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Fechado</span></button>
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="nandos">Nando’s Sommerschield</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></div>
                 <p class="spot-subtitle">Fast-food · Delivery</p>
-                <p class="spot-description">0,8 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>350–850 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article>
 <article class="spot-card" data-spot-id="pastelaria-central">
             <button class="spot-image-wrap" type="button" data-details="pastelaria-central" aria-label="Ver detalhes de Pastelaria Central"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pastelaria-central">Pastelaria Central</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,7 de 5">★ 4,7</span></div>
                 <p class="spot-subtitle">Padarias · Local</p>
-                <p class="spot-description">1,1 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>80–300 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article>
 <article class="spot-card" data-spot-id="pizza-inn">
             <button class="spot-image-wrap" type="button" data-details="pizza-inn" aria-label="Ver detalhes de Pizza Inn Baixa"><img src="../media/imagens/images%20(2).jpeg" alt="Imagem ilustrativa de pizza" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pizza-inn">Pizza Inn Baixa</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 3,9 de 5">★ 3,9</span></div>
                 <p class="spot-subtitle">Pizza · Local + Delivery</p>
-                <p class="spot-description">1,4 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>400–1200 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article>
 <article class="spot-card" data-spot-id="bom-dia">
             <button class="spot-image-wrap" type="button" data-details="bom-dia" aria-label="Ver detalhes de Bom Dia Bakery"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
             <div class="spot-card-body">
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="bom-dia">Bom Dia Bakery</button></h3><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></div>
                 <p class="spot-subtitle">Padarias · Local</p>
-                <p class="spot-description">1,8 km</p>
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>Desde 100 MZN</strong><small>Preço demonstrativo</small></span></p>
             </div></article></div>
                     <div class="spots-empty" id="spots-empty" hidden><h3>Nenhum spot encontrado</h3><p>Tente outro nome, categoria ou zona.</p><button class="btn btn-teal" type="button" data-clear>Limpar filtros</button></div>
                     <div class="load-more"><p id="results-shown"></p><button class="small-button" type="button" id="load-more">Ver mais resultados</button></div>
@@ -242,7 +302,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pastelaria-central">Pastelaria Central</button></h3></div>
                 <p class="spot-subtitle">Padarias · Local</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,7 de 5">★ 4,7</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>80–300 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,7 de 5">★ 4,7</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="polana-cafe" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="polana-cafe" aria-label="Ver detalhes de Polana Café"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
@@ -250,7 +310,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="polana-cafe">Polana Café</button></h3></div>
                 <p class="spot-subtitle">Cafés · Local + Delivery</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>150–450 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,5 de 5">★ 4,5</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="pao-quente" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="pao-quente" aria-label="Ver detalhes de Casa do Pão Quente"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de padarias" class="" width="600" height="450" loading="lazy" decoding="async"></button>
@@ -266,7 +326,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="bom-dia">Bom Dia Bakery</button></h3></div>
                 <p class="spot-subtitle">Padarias · Local</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 1">Faixa <strong>$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>Desde 100 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,3 de 5">★ 4,3</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="expresso-maputo" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="expresso-maputo" aria-label="Ver detalhes de Expresso Maputo"><img src="../media/imagens/cafe2.jpeg" alt="Imagem ilustrativa de cafés" class="" width="600" height="450" loading="lazy" decoding="async"></button>
@@ -328,7 +388,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="maputo-grill">Maputo Grill</button></h3></div>
                 <p class="spot-subtitle">Restaurantes · Local</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 3">Faixa <strong>$$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,2 de 5">★ 4,2</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>500–1500 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4,2 de 5">★ 4,2</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="nandos" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="nandos" aria-label="Ver detalhes de Nando’s Sommerschield"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de fast-food" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Fechado</span></button>
@@ -336,7 +396,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="nandos">Nando’s Sommerschield</button></h3></div>
                 <p class="spot-subtitle">Fast-food · Delivery</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>350–850 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 4 de 5">★ 4</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="pizza-inn" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="pizza-inn" aria-label="Ver detalhes de Pizza Inn Baixa"><img src="../media/imagens/images%20(2).jpeg" alt="Imagem ilustrativa de pizza" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
@@ -344,7 +404,7 @@
                 <div class="spot-title-row"><h3><button class="spot-title-button" type="button" data-details="pizza-inn">Pizza Inn Baixa</button></h3></div>
                 <p class="spot-subtitle">Pizza · Local + Delivery</p>
 
-                <p class="spot-card-meta"><span class="spot-price" aria-label="Faixa de preço 2">Faixa <strong>$$</strong></span><span class="spot-rating" aria-label="Avaliação demonstrativa 3,9 de 5">★ 3,9</span></p>
+                <p class="spot-card-meta"><span class="spot-price"><strong>400–1200 MZN</strong><small>Preço demonstrativo</small></span><span class="spot-rating" aria-label="Avaliação demonstrativa 3,9 de 5">★ 3,9</span></p>
             </div></article>
 <article class="spot-card spot-card-compact" data-spot-id="kadiwa-grill" role="listitem">
             <button class="spot-image-wrap" type="button" data-details="kadiwa-grill" aria-label="Ver detalhes de Kadiwa Grill"><img src="../media/imagens/GRILL.jpeg" alt="Imagem ilustrativa de restaurantes" class="" width="600" height="450" loading="lazy" decoding="async"><span class="spot-tag">Aberto agora</span></button>
@@ -363,8 +423,7 @@
             <div class="footer-top-grid">
                 <div class="footer-brand-col">
                     <img class="footer-logo-img" src="../media/imagens/logo-dark.png" alt="Kadiwa Spot">
-                    <p>O guia de sabores e experiências que aproxima pessoas dos melhores lugares para comer em
-                        Moçambique.</p>
+                    <p>Kadiwa Spot (KadiwaSpot), o guia de restaurantes, cafés e takeaways em Moçambique, com foco em Maputo e Matola.</p>
                 </div>
 
                 <div class="footer-links-col">

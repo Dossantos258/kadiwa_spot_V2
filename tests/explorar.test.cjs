@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../js/explorar-dados.js'), 'utf8'), context);
-const { spots, selectSpots, normalize, mapLinks } = context.window.KadiwaExploreData;
+const { spots, selectSpots, normalize, mapLinks, minimumPrice, priceLabel, distanceKm } = context.window.KadiwaExploreData;
 const select = changes => Array.from(selectSpots(spots, { query: '', location: '', categories: [], open: false, price: null, rating: null, sort: 'relevance', ...changes }));
 
 test('preserva o catálogo anterior e os exemplos do wireframe, sem alterar o original', () => {
@@ -25,7 +25,7 @@ test('combina nome, categoria, zona e disponibilidade', () => {
     assert.equal(select({ query: 'Acácia', open: true, price: 1 }).length, 0);
 });
 test('preço e avaliação excluem valores desconhecidos', () => {
-    assert.deepEqual(select({ price: 2, rating: 4, open: true }).map(s => s.id), ['polana-cafe']);
+    assert.deepEqual(select({ price: 2, rating: 4, open: true }).map(s => s.id), ['maputo-grill']);
     assert.ok(select({ rating: 4.5 }).every(s => s.rating >= 4.5));
 });
 test('selecção de várias categorias usa união e delivery usa a modalidade', () => {
@@ -36,13 +36,45 @@ test('selecção de várias categorias usa união e delivery usa a modalidade', 
     assert.ok(select({ categories: ['cafe'] }).some(s => s.id === 'padaria-nova'));
 });
 test('ordena por distância, preço e avaliação, deixando desconhecidos no fim', () => {
-    for (const [sort, key, descending] of [['distance', 'distance', false], ['price', 'price', false], ['rating', 'rating', true]]) {
+    for (const [sort, key, descending] of [['price', 'priceMin', false], ['rating', 'rating', true]]) {
         const result = select({ sort });
         const known = result.filter(s => s[key] != null);
         assert.deepEqual(result.slice(0, known.length), known);
         for (let i = 1; i < known.length; i++) assert.ok(descending ? known[i-1][key] >= known[i][key] : known[i-1][key] <= known[i][key]);
     }
     assert.equal(spots[0].id, 'polana-cafe');
+});
+
+test('intervalos em MZN e mínimos não convertem símbolos de dólar em preços reais', () => {
+    assert.equal(priceLabel({ price: 2 }), 'Preço não informado');
+    assert.equal(priceLabel({ priceMin: null }), 'Preço não informado');
+    assert.equal(priceLabel({ priceMin: -10 }), 'Preço não informado');
+    assert.equal(priceLabel({ priceMin: 250, priceMax: 550 }), '250–550 MZN');
+    assert.equal(priceLabel({ priceMin: 250, priceMax: null }), 'Desde 250 MZN');
+    assert.equal(priceLabel({ priceMin: 0 }), 'Desde 0 MZN');
+    assert.ok(spots.filter(s => minimumPrice(s) != null).every(s => s.priceIsDemo));
+    assert.ok(select({ price: 1 }).every(s => s.priceMin <= 300));
+    assert.ok(select({ price: 2 }).every(s => s.priceMin > 300 && s.priceMin <= 600));
+    assert.ok(select({ price: 3 }).every(s => s.priceMin > 600 && s.priceMin <= 1000));
+    assert.ok(select({ price: 4 }).every(s => s.priceMin > 1000));
+    assert.equal(select({ price: 1 }).some(s => s.priceMin == null), false);
+});
+
+test('distância vem das coordenadas do utilizador; desconhecidos não usam distâncias do wireframe', () => {
+    const bite = spots.find(s => s.id === 'one-bite');
+    const flame = spots.find(s => s.id === 'flame-stack');
+    assert.equal(distanceKm(bite.coordinates, bite.coordinates), 0);
+    assert.ok(distanceKm([0, 0], [0, 1]) > 111 && distanceKm([0, 0], [0, 1]) < 112);
+    assert.equal(distanceKm(null, bite.coordinates), null);
+    assert.equal(distanceKm([95, 0], bite.coordinates), null);
+    assert.equal(select({ sort: 'distance', origin: bite.coordinates })[0].id, 'one-bite');
+    assert.equal(select({ sort: 'distance', origin: flame.coordinates })[0].id, 'flame-stack');
+    assert.ok(select({ sort: 'distance', origin: bite.coordinates }).slice(2).every(s => s.coordinates == null));
+    assert.deepEqual(select({ sort: 'distance' }).map(s => s.id), Array.from(spots, s => s.id));
+    const url = new URL(mapLinks(bite, flame.coordinates).directions);
+    assert.equal(url.searchParams.get('origin'), flame.coordinates.join(','));
+    assert.equal(url.searchParams.get('destination'), bite.coordinates.join(','));
+    assert.ok(!mapLinks(bite, flame.coordinates).copyText.includes(flame.coordinates.join(',')));
 });
 test('sem correspondências não inventa resultados; limpar restaura todos', () => {
     assert.equal(select({ query: 'xxxx-inexistente' }).length, 0);
