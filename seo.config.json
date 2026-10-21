@@ -38,7 +38,7 @@
       "label": "Para negócios",
       "type": "WebPage",
       "title": "Publicidade para restaurantes em Moçambique | Kadiwa Spot",
-      "description": "Apresente o seu restaurante, café ou takeaway no Kadiwa Spot. Conheça planos de presença digital e formatos de publicidade em Maputo e Matola."
+      "description": "Dê visibilidade ao seu restaurante, café ou takeaway no Kadiwa Spot, com anúncios no website, destaques e campanhas de divulgação por email."
     },
     {
       "file": "pages/contacto.html",
@@ -46,7 +46,7 @@
       "label": "Contacto e parcerias",
       "type": "ContactPage",
       "title": "Contacto e parcerias em Moçambique | Kadiwa Spot",
-      "description": "Contacte a equipa do Kadiwa Spot para sugerir um restaurante, esclarecer informações, conhecer soluções de publicidade ou propor parcerias em Moçambique."
+      "description": "Contacte a equipa do Kadiwa Spot para registar um estabelecimento, pedir destaques no website, divulgar por email ou propor parcerias em Moçambique."
     }
   ]
 }
